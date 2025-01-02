@@ -1,11 +1,15 @@
+import AddButton from '@/components/AddButton';
+import ThemedText from '@/components/ThemedText';
+import ThemedView from '@/components/ThemedView';
 import React from 'react';
-import { Text, View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <Text>Edit app/index.tsx to edit this screen.</Text>
-    </View>
+    <ThemedView style={styles.container}>
+      <ThemedText>Coucou</ThemedText>
+      <AddButton onPress={() => {}} />
+    </ThemedView>
   );
 }
 

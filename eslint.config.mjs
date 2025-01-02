@@ -32,6 +32,12 @@ export default [
       ...tseslint.configs.recommended.rules,
       ...eslintPluginReactNative.configs.all.rules,
       ...eslintConfigPrettier.rules,
+      'react-native/no-raw-text': [
+        'error',
+        {
+          skip: ['ThemedText'],
+        },
+      ],
     },
   },
 ];

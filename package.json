@@ -9,7 +9,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
-    "lint": "eslint app/ --fix"
+    "lint": "eslint . --fix"
   },
   "lint-staged": {
     "app/**/*.+(ts|tsx)": [
