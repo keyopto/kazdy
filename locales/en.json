@@ -1,4 +1,9 @@
 {
-  "home": "Home",
-  "add_goal": "Ajout d'un goal"
+  "home": {
+    "title": "Home"
+  },
+  "add_goal": {
+    "title": "Adding Goal",
+    "placeholder_date": "Deadline"
+  }
 }

@@ -7,17 +7,25 @@ import useThemeColor from '@/hooks/useThemeColor';
 import ThemedIconSymbol from './ThemedIconSymbol';
 
 export type CustomDatePickerProps = {
-  date: Date;
+  date: Date | undefined;
+  defaultDate?: Date;
   setDate: (newDate: Date) => void;
   mode: 'date' | 'time';
+  placeholder?: string;
 };
 
-const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ date, setDate, mode }) => {
+const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
+  date,
+  defaultDate = new Date(),
+  setDate,
+  mode,
+  placeholder = '',
+}) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
   const borderColor = useThemeColor({}, 'border_input');
 
-  const color = useThemeColor({}, !!date ? 'text' : 'placeholder_color');
+  const color = useThemeColor({}, date ? 'text' : 'placeholder_color');
 
   const onChangeDate = (_event: DateTimePickerEvent, newDate?: Date) => {
     setIsModalVisible(false);
@@ -33,10 +41,21 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ date, setDate, mode
       return null;
     }
 
-    return <DateTimePicker value={date} mode={mode} onChange={onChangeDate} is24Hour={true} />;
+    return (
+      <DateTimePicker
+        value={date || defaultDate}
+        mode={mode}
+        onChange={onChangeDate}
+        is24Hour={true}
+      />
+    );
   };
 
-  const formatDate = (dateToFormat: Date) => {
+  const formatDate = (dateToFormat: Date | undefined) => {
+    if (!dateToFormat) {
+      return placeholder;
+    }
+
     return dateToFormat.toLocaleDateString('fr-fr');
   };
 
@@ -48,7 +67,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({ date, setDate, mode
     <ThemedPressable onPress={onPress} style={[{ borderColor }, styles.container]}>
       <ThemedIconSymbol name="calendar" size={18} />
       <ThemedText lightColor={color} darkColor={color}>
-        {formatDate(date)}{' '}
+        {formatDate(date)}
       </ThemedText>
       {getModalPicker()}
     </ThemedPressable>
@@ -59,15 +78,11 @@ export default CustomDatePicker;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    padding: 10,
     alignItems: 'center',
-    gap: 10,
-    borderWidth: 2,
     borderRadius: 8,
-  },
-  calendarIcon: {
-    height: 25,
-    width: 25,
+    borderWidth: 2,
+    flexDirection: 'row',
+    gap: 10,
+    padding: 10,
   },
 });

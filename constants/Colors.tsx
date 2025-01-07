@@ -5,6 +5,7 @@ const Colors = {
     border_input: '#c8c8c8',
     box: '#c8c8c8',
     placeholder_color: '#ccc',
+    add_button: '#cecece',
   },
   dark: {
     text: '#ECEDEE',
@@ -12,6 +13,7 @@ const Colors = {
     border_input: '#c8c8c8',
     box: '#c8c8c8',
     placeholder_color: '#ccc',
+    add_button: '#cecece',
   },
 };
 

@@ -20,14 +20,14 @@ export default function RootLayout() {
             name="index"
             options={{
               headerShown: false,
-              title: t('home'),
+              title: t('home.title'),
             }}
           />
           <Screen
             name="add_goal"
             options={{
               presentation: 'modal',
-              title: t('add_goal'),
+              title: t('add_goal.title'),
             }}
           />
         </Stack>
