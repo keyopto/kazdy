@@ -1,5 +1,6 @@
+import CustomDatePicker from '@/components/CustomDatePicker';
 import ThemedView from '@/components/ThemedView';
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet } from 'react-native';
 
 export type AddGoalProps = {
@@ -7,7 +8,13 @@ export type AddGoalProps = {
 };
 
 const AddGoal: React.FC<AddGoalProps> = () => {
-  return <ThemedView style={styles.container}></ThemedView>;
+  const [date, setDate] = useState<Date>(new Date());
+
+  return (
+    <ThemedView style={styles.container}>
+      <CustomDatePicker mode="date" date={date} setDate={setDate} />
+    </ThemedView>
+  );
 };
 
 export default AddGoal;
@@ -15,5 +22,6 @@ export default AddGoal;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    padding: 20,
   },
 });
