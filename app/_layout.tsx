@@ -6,33 +6,43 @@ import { useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '@/i18';
+import { SQLiteProvider } from 'expo-sqlite';
+import migrateDbIfNeeded from '@/migrations/_migrate';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const { t } = useTranslation();
 
+  const getStack = () => {
+    return (
+      <Stack>
+        <Screen
+          name="index"
+          options={{
+            headerShown: false,
+            title: t('home.title'),
+          }}
+        />
+        <Screen
+          name="add_goal"
+          options={{
+            presentation: 'modal',
+            title: t('add_goal.title'),
+          }}
+        />
+      </Stack>
+    );
+  };
+
   return (
-    <I18nextProvider i18n={i18n}>
-      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Screen
-            name="index"
-            options={{
-              headerShown: false,
-              title: t('home.title'),
-            }}
-          />
-          <Screen
-            name="add_goal"
-            options={{
-              presentation: 'modal',
-              title: t('add_goal.title'),
-            }}
-          />
-        </Stack>
-        <StatusBar style="auto" />
-      </ThemeProvider>
-    </I18nextProvider>
+    <SQLiteProvider databaseName="kazdy.db" onInit={migrateDbIfNeeded}>
+      <I18nextProvider i18n={i18n}>
+        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+          {getStack()}
+          <StatusBar style="auto" />
+        </ThemeProvider>
+      </I18nextProvider>
+    </SQLiteProvider>
   );
 }

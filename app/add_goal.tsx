@@ -1,42 +1,70 @@
-import CustomDatePicker from '@/components/CustomDatePicker';
-import CustomTextInput from '@/components/CustomTextInput';
-import ThemedView from '@/components/ThemedView';
-import React, { useState } from 'react';
+import ThemedView from '@/components/ThemedComponents/ThemedView';
+import AddGoalForm, { type FormDataAddGoalForm } from '@/types/forms/AddGoalForm';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { StyleSheet } from 'react-native';
+import { zodResolver } from '@hookform/resolvers/zod';
+import ControllerTextInput from '@/components/ControllerInputs/ControllerTextInput';
+import ControllerDatePicker from '@/components/ControllerInputs/ControllerDatePicker';
+import ThemedButton from '@/components/ThemedComponents/ThemedButton';
+import useDBGoal from '@/hooks/db/useDBGoal';
+import { router } from 'expo-router';
 
 export type AddGoalProps = {
   __placeholder?: never;
 };
 
 const AddGoal: React.FC<AddGoalProps> = () => {
-  const [title, setTitle] = useState<string>('');
-  const [date, setDate] = useState<Date | undefined>(undefined);
-  const [description, setDescription] = useState<string>('');
-
   const { t } = useTranslation();
+
+  const {
+    control,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormDataAddGoalForm>({
+    resolver: zodResolver(AddGoalForm(t)),
+  });
+
+  const { insertGoal } = useDBGoal();
+
+  const getDefaultDate = () => {
+    const defaultDate = new Date();
+
+    defaultDate.setFullYear(defaultDate.getFullYear() + 1);
+
+    return defaultDate;
+  };
+
+  const onSubmit = async (goal: FormDataAddGoalForm) => {
+    await insertGoal(goal);
+    router.dismissTo('/');
+  };
 
   return (
     <ThemedView style={styles.container}>
-      <CustomTextInput
+      <ControllerTextInput
+        control={control}
+        name="title"
         placeholder={t('add_goal.placeholder_title')}
-        value={title}
-        setValue={setTitle}
+        error={errors.title}
       />
-
-      <CustomDatePicker
-        mode="date"
-        date={date}
-        setDate={setDate}
+      <ControllerDatePicker
+        control={control}
+        name="date"
         placeholder={t('add_goal.placeholder_date')}
+        mode="date"
+        error={errors.date}
+        defaultDate={getDefaultDate()}
+      />
+      <ControllerTextInput
+        control={control}
+        name="description"
+        placeholder={t('add_goal.placeholder_description')}
+        error={errors.description}
       />
 
-      <CustomTextInput
-        placeholder={t('add_goal.placeholder_description')}
-        value={description}
-        setValue={setDescription}
-        multiline={true}
-      />
+      <ThemedButton title="Submit" onPress={handleSubmit(onSubmit)} />
     </ThemedView>
   );
 };

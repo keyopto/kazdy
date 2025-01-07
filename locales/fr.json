@@ -7,5 +7,16 @@
     "placeholder_date": "Date limite",
     "placeholder_title": "Titre",
     "placeholder_description": "Description"
+  },
+  "validation": {
+    "title": {
+      "required": "Le titre est requis"
+    },
+    "date": {
+      "required": "La date est requise"
+    },
+    "description": {
+      "required": "La description est requise"
+    }
   }
 }

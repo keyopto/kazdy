@@ -1,7 +1,7 @@
 import React from 'react';
-import ThemedText from './ThemedText';
+import ThemedText from './ThemedComponents/ThemedText';
 import { StyleSheet } from 'react-native';
-import ThemedPressable from './ThemedPressable';
+import ThemedPressable from './ThemedComponents/ThemedPressable';
 import Colors from '@/constants/Colors';
 
 export type AddButtonProps = {

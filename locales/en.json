@@ -7,5 +7,16 @@
     "placeholder_date": "Deadline",
     "placeholder_title": "Title",
     "placeholder_description": "Description"
+  },
+  "validation": {
+    "title": {
+      "required": "Title is required"
+    },
+    "date": {
+      "required": "Date is required"
+    },
+    "description": {
+      "required": "Description is required"
+    }
   }
 }
