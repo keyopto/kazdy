@@ -4,6 +4,8 @@
   },
   "add_goal": {
     "title": "Ajout d'un goal",
-    "placeholder_date": "Date limite"
+    "placeholder_date": "Date limite",
+    "placeholder_title": "Titre",
+    "placeholder_description": "Description"
   }
 }
