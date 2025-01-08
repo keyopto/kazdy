@@ -6,7 +6,7 @@ const MIGRATIONS = [migration1];
 const getVersion = async (db: SQLiteDatabase): Promise<number> => {
   try {
     const result = await db.getFirstAsync<{ user_version: number }>('PRAGMA user_version');
-    return result?.user_version || -1;
+    return result?.user_version || 0;
   } catch (e) {
     throw new Error('Cannot get user version', { cause: e });
   }

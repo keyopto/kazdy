@@ -2,16 +2,29 @@ import React from 'react';
 import { View, type ViewProps } from 'react-native';
 
 import useThemeColor from '@/hooks/useThemeColor';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import type Colors from '@/constants/Colors';
 
 export type ThemedViewProps = ViewProps & {
   lightColor?: string;
   darkColor?: string;
+  safeArea?: boolean;
+  themeColor?: keyof typeof Colors.light & keyof typeof Colors.dark;
 };
 
-const ThemedView = ({ style, lightColor, darkColor, ...otherProps }: ThemedViewProps) => {
-  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, 'background');
+const ThemedView = ({
+  style,
+  themeColor = 'background',
+  lightColor,
+  darkColor,
+  safeArea,
+  ...otherProps
+}: ThemedViewProps) => {
+  const backgroundColor = useThemeColor({ light: lightColor, dark: darkColor }, themeColor);
 
-  return <View style={[{ backgroundColor }, style]} {...otherProps} />;
+  const ViewComponent = safeArea ? SafeAreaView : View;
+
+  return <ViewComponent style={[{ backgroundColor }, style]} {...otherProps} />;
 };
 
 export default ThemedView;

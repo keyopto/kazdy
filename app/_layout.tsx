@@ -8,6 +8,8 @@ import { I18nextProvider, useTranslation } from 'react-i18next';
 import i18n from '@/i18';
 import { SQLiteProvider } from 'expo-sqlite';
 import migrateDbIfNeeded from '@/migrations/_migrate';
+import { Provider } from 'react-redux';
+import { store } from '@/redux/store';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -36,13 +38,15 @@ export default function RootLayout() {
   };
 
   return (
-    <SQLiteProvider databaseName="kazdy.db" onInit={migrateDbIfNeeded}>
-      <I18nextProvider i18n={i18n}>
-        <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-          {getStack()}
-          <StatusBar style="auto" />
-        </ThemeProvider>
-      </I18nextProvider>
-    </SQLiteProvider>
+    <Provider store={store}>
+      <SQLiteProvider databaseName="kazdy.db" onInit={migrateDbIfNeeded}>
+        <I18nextProvider i18n={i18n}>
+          <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+            {getStack()}
+            <StatusBar style="auto" />
+          </ThemeProvider>
+        </I18nextProvider>
+      </SQLiteProvider>
+    </Provider>
   );
 }

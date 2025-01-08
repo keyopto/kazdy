@@ -1,11 +1,14 @@
 import AddButton from '@/components/AddButton';
-import ThemedText from '@/components/ThemedComponents/ThemedText';
+import SummaryGoal from '@/components/Home/SummaryGoal';
 import ThemedView from '@/components/ThemedComponents/ThemedView';
+import useGoals from '@/hooks/useGoals';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
 export default function Index() {
+  const { goals } = useGoals();
+
   const router = useRouter();
 
   const onPressAdd = () => {
@@ -13,8 +16,10 @@ export default function Index() {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <ThemedText>Coucou</ThemedText>
+    <ThemedView safeArea style={styles.container}>
+      {goals.map((goal) => {
+        return <SummaryGoal key={goal.id} goal={goal} />;
+      })}
       <AddButton onPress={onPressAdd} />
     </ThemedView>
   );
@@ -22,8 +27,8 @@ export default function Index() {
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
+    gap: 10,
+    padding: 10,
   },
 });

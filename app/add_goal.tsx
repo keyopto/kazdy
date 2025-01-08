@@ -8,8 +8,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import ControllerTextInput from '@/components/ControllerInputs/ControllerTextInput';
 import ControllerDatePicker from '@/components/ControllerInputs/ControllerDatePicker';
 import ThemedButton from '@/components/ThemedComponents/ThemedButton';
-import useDBGoal from '@/hooks/db/useDBGoal';
 import { router } from 'expo-router';
+import useGoals from '@/hooks/useGoals';
 
 export type AddGoalProps = {
   __placeholder?: never;
@@ -17,6 +17,7 @@ export type AddGoalProps = {
 
 const AddGoal: React.FC<AddGoalProps> = () => {
   const { t } = useTranslation();
+  const { addGoal } = useGoals();
 
   const {
     control,
@@ -25,8 +26,6 @@ const AddGoal: React.FC<AddGoalProps> = () => {
   } = useForm<FormDataAddGoalForm>({
     resolver: zodResolver(AddGoalForm(t)),
   });
-
-  const { insertGoal } = useDBGoal();
 
   const getDefaultDate = () => {
     const defaultDate = new Date();
@@ -37,7 +36,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
   };
 
   const onSubmit = async (goal: FormDataAddGoalForm) => {
-    await insertGoal(goal);
+    await addGoal(goal);
     router.dismissTo('/');
   };
 
