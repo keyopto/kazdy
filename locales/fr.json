@@ -8,6 +8,9 @@
     "placeholder_title": "Titre",
     "placeholder_description": "Description"
   },
+  "goal_details": {
+    "title": "Détails du goal"
+  },
   "validation": {
     "title": {
       "required": "Le titre est requis"
@@ -18,5 +21,8 @@
     "description": {
       "required": "La description est requise"
     }
+  },
+  "general": {
+    "delete": "Supprimer"
   }
 }

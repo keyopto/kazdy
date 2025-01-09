@@ -5,6 +5,9 @@ import { type OpaqueColorValue, type StyleProp, type TextStyle } from 'react-nat
 
 const MAPPING = {
   calendar: 'calendar-month',
+  'table.badge.more': 'more-vert',
+  'cross.fill': 'close',
+  'bin.xmark.fill': 'delete',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

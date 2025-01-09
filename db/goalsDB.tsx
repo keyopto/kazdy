@@ -3,7 +3,7 @@ import type { FormDataAddGoalForm } from '@/types/forms/AddGoalForm';
 import type { Goal } from '@/types/Goal';
 
 export const selectGoalFromId = async (id: number) => {
-  return await db.getFirstAsync<Goal>('SELECT * FROM goal WHERE id=?', id);
+  return await db.getFirstAsync<Goal>('SELECT * FROM goal WHERE id = ?', id);
 };
 
 export const selectAllGoals = async () => {
@@ -21,4 +21,8 @@ export const insertGoal = async (goal: FormDataAddGoalForm): Promise<number> => 
   );
 
   return result.lastInsertRowId;
+};
+
+export const deleteGoal = async (goalId: number): Promise<void> => {
+  await db.runAsync(`DELETE FROM goal WHERE id = ?`, goalId);
 };

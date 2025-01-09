@@ -25,6 +25,13 @@ const goalsSlice = createSlice({
     addGoalRedux(state, action: PayloadAction<Goal>) {
       state.list.push(action.payload);
     },
+    removeGoalRedux(state, action: PayloadAction<number>) {
+      const index = state.list.findIndex((goal) => goal.id === action.payload);
+      if (index === -1) {
+        throw new Error('Cannot remove goal : not found id');
+      }
+      state.list.splice(index, 1);
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -43,5 +50,5 @@ const goalsSlice = createSlice({
   },
 });
 
-export const { addGoalRedux } = goalsSlice.actions;
+export const { addGoalRedux, removeGoalRedux } = goalsSlice.actions;
 export default goalsSlice.reducer;

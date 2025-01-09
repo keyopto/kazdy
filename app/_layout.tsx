@@ -33,6 +33,13 @@ export default function RootLayout() {
             title: t('add_goal.title'),
           }}
         />
+        <Screen
+          name="goal_details"
+          options={{
+            presentation: 'modal',
+            title: t('goal_details.title'),
+          }}
+        />
       </Stack>
     );
   };

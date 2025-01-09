@@ -28,5 +28,7 @@ const ThemedText: React.FC<ThemedTextProps> = ({
 export default ThemedText;
 
 const styles = StyleSheet.create({
-  default: {},
+  default: {
+    fontSize: 15,
+  },
 });

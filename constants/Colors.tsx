@@ -9,6 +9,8 @@ const Colors = {
     placeholder_color: '#ccc',
     add_button: '#cecece',
     button: '#9c6f9f',
+    modal_bottom_color: '#ccc',
+    transparent: 'transparent',
   },
   dark: {
     text: '#ECEDEE',
@@ -20,6 +22,8 @@ const Colors = {
     placeholder_color: '#ccc',
     add_button: '#cecece',
     button: '#9c6f9f',
+    modal_bottom_color: '#333',
+    transparent: 'transparent',
   },
 };
 
