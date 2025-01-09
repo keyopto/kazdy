@@ -8,6 +8,7 @@ const MAPPING = {
   'table.badge.more': 'more-vert',
   'cross.fill': 'close',
   'bin.xmark.fill': 'delete',
+  'calendar.circle.fill': 'edit-calendar',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

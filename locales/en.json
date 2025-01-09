@@ -1,6 +1,7 @@
 {
   "home": {
-    "title": "Home"
+    "title": "Home",
+    "catchphrase": "Your objectives"
   },
   "add_goal": {
     "title": "Adding Goal",

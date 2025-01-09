@@ -1,6 +1,7 @@
 {
   "home": {
-    "title": "Accueil"
+    "title": "Accueil",
+    "catchphrase": "Gérez vos objectifs"
   },
   "add_goal": {
     "title": "Ajout d'un goal",
