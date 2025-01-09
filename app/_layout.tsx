@@ -34,7 +34,7 @@ export default function RootLayout() {
           }}
         />
         <Screen
-          name="goal_details"
+          name="goal_details/[id]"
           options={{
             presentation: 'modal',
             title: t('goal_details.title'),

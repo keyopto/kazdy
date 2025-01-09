@@ -8,16 +8,19 @@ import formatDate from '@/utils/formatDate';
 import type { UnknownOutputParams } from 'expo-router';
 import { useLocalSearchParams } from 'expo-router/build/hooks';
 import React, { useEffect, useState } from 'react';
-import { StyleSheet } from 'react-native';
+import { ImageBackground, StyleSheet } from 'react-native';
+import DefaultImage from '@/assets/images/default_goal.jpg';
+import { useTranslation } from 'react-i18next';
 
 export interface GoalDetailsScreenParams extends UnknownOutputParams {
-  goalId: string;
+  id: string;
 }
 
 const GoalDetails = () => {
-  const { goalId } = useLocalSearchParams<GoalDetailsScreenParams>();
+  const { id } = useLocalSearchParams<GoalDetailsScreenParams>();
   const { getGoalById } = useGoals();
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const { t } = useTranslation();
 
   const [goal, setGoal] = useState<Goal>();
 
@@ -30,7 +33,7 @@ const GoalDetails = () => {
   };
 
   const setup = async () => {
-    const goalFromDB = await getGoalById(Number(goalId));
+    const goalFromDB = await getGoalById(Number(id));
 
     if (!goalFromDB) {
       throw new Error('goal not found in db');
@@ -41,7 +44,7 @@ const GoalDetails = () => {
 
   useEffect(() => {
     setup();
-  }, [goalId]);
+  }, [id]);
 
   if (!goal) {
     //TODO loading
@@ -50,10 +53,19 @@ const GoalDetails = () => {
 
   return (
     <ThemedView style={styles.container}>
-      <MoreButton onPress={openModal} />
-      <ThemedText> {goal.title} </ThemedText>
-      <ThemedText> {formatDate(goal.date)} </ThemedText>
-      <ThemedText> {goal.description} </ThemedText>
+      <ThemedView style={styles.header}>
+        <ThemedText style={styles.title}> {goal.title}</ThemedText>
+        <MoreButton onPress={openModal} />
+      </ThemedView>
+      <ImageBackground source={DefaultImage} style={styles.image} />
+      <ThemedView style={styles.dateContainer}>
+        <ThemedText style={styles.dDay}> {t('goal_details.d_day')} </ThemedText>
+        <ThemedText style={styles.date}> {formatDate(goal.date)} </ThemedText>
+      </ThemedView>
+      <ThemedView style={styles.descriptionContainer}>
+        <ThemedText> {t('goal_details.description')}</ThemedText>
+        <ThemedText> {goal.description} </ThemedText>
+      </ThemedView>
       <ModalBottom isVisible={isModalVisible} dismiss={dismissModal} goal={goal} />
     </ThemedView>
   );
@@ -64,5 +76,30 @@ export default GoalDetails;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  dDay: {
+    fontSize: 15,
+  },
+  date: {
+    fontSize: 25,
+    fontWeight: 'bold',
+  },
+  dateContainer: {
+    alignItems: 'center',
+  },
+  descriptionContainer: {
+    gap: 10,
+    paddingHorizontal: 10,
+  },
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  image: {
+    height: 200,
+    marginVertical: 10,
+  },
+  title: {
+    fontSize: 20,
   },
 });

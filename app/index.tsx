@@ -24,7 +24,10 @@ export default function Index() {
     return (
       <ThemedView style={styles.header}>
         <ThemedIconSymbol name="calendar.circle.fill" size={155} themeColor="button" />
-        <ThemedText style={styles.title}>{t('home.catchphrase')} </ThemedText>
+        <ThemedText themeColor="button" style={styles.title}>
+          Kazdy
+        </ThemedText>
+        <ThemedText style={styles.catchphrase}>{t('home.catchphrase')} </ThemedText>
       </ThemedView>
     );
   };
@@ -47,6 +50,9 @@ export default function Index() {
 }
 
 const styles = StyleSheet.create({
+  catchphrase: {
+    fontSize: 30,
+  },
   container: {
     flex: 1,
     gap: 10,
@@ -61,5 +67,6 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 40,
+    fontWeight: 'bold',
   },
 });

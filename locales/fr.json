@@ -10,7 +10,9 @@
     "placeholder_description": "Description"
   },
   "goal_details": {
-    "title": "Détails du goal"
+    "title": "Détails du goal",
+    "d_day": "Jour J :",
+    "description": "Description:"
   },
   "validation": {
     "title": {

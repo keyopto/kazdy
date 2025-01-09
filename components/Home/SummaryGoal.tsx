@@ -18,9 +18,9 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
 
   const goToDetails = () => {
     router.push({
-      pathname: '/goal_details',
+      pathname: `/goal_details/[id]`,
       params: {
-        goalId: goal.id.toString(),
+        id: goal.id.toString(),
       },
     });
   };
