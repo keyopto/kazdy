@@ -3,7 +3,7 @@ import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
 import { addGoalRedux, fetchGoals, removeGoalRedux } from '@/redux/goalsSlice';
 import type { Goal } from '@/types/Goal';
-import type { FormDataAddGoalForm } from '@/types/forms/AddGoalForm';
+import type { FormDataAddGoal } from '@/types/forms/AddGoalForm';
 import { deleteGoal, insertGoal, selectGoalFromId } from '@/db/goalsDB';
 import { selectorAllGoals } from '@/redux/selectors/goalSelector';
 
@@ -11,7 +11,7 @@ export type useGoalsType = {
   goals: Goal[];
   loading: boolean;
   error: string | null;
-  addGoal: (goal: FormDataAddGoalForm) => Promise<void>;
+  addGoal: (goal: FormDataAddGoal) => Promise<void>;
   getGoalById: (id: number) => Promise<Goal | null>;
   removeGoal: (id: number) => Promise<void>;
 };
@@ -28,7 +28,7 @@ const useGoals = (): useGoalsType => {
     }
   }, [goals.length, dispatch]);
 
-  const addGoal = async (goal: FormDataAddGoalForm) => {
+  const addGoal = async (goal: FormDataAddGoal) => {
     const idInserted = await insertGoal(goal);
     const goalAdded = await selectGoalFromId(idInserted);
     if (!goalAdded) {

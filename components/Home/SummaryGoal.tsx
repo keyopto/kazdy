@@ -6,16 +6,13 @@ import { router } from 'expo-router';
 import { ImageBackground, StyleSheet } from 'react-native';
 import ThemedView from '../ThemedComponents/ThemedView';
 import DefaultImage from '@/assets/images/default_goal.jpg';
+import formatDate from '@/utils/formatDate';
 
 export type SummaryGoalProps = {
   goal: Goal;
 };
 
 const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
-  const formatDate = () => {
-    return goal.date.toLocaleDateString('fr-fr');
-  };
-
   const goToDetails = () => {
     router.push({
       pathname: `/goal_details/[id]`,
@@ -40,7 +37,7 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
         </ThemedView>
 
         <ThemedView style={styles.dateContainer}>
-          <ThemedText style={styles.date}>{formatDate()}</ThemedText>
+          <ThemedText style={styles.date}>{formatDate(goal.date)}</ThemedText>
         </ThemedView>
       </ImageBackground>
     </ThemedPressable>

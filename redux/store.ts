@@ -1,9 +1,11 @@
 import { configureStore, type ThunkDispatch } from '@reduxjs/toolkit';
 import goalsReducer from './goalsSlice';
+import milestonesReducer from './milestonesSlice';
 
 export const store = configureStore({
   reducer: {
     goals: goalsReducer,
+    milestones: milestonesReducer,
   },
 });
 

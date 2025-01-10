@@ -1,5 +1,5 @@
 import ThemedView from '@/components/ThemedComponents/ThemedView';
-import AddGoalForm, { type FormDataAddGoalForm } from '@/types/forms/AddGoalForm';
+import AddGoalForm, { type FormDataAddGoal } from '@/types/forms/AddGoalForm';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
@@ -24,7 +24,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<FormDataAddGoalForm>({
+  } = useForm<FormDataAddGoal>({
     resolver: zodResolver(AddGoalForm(t)),
   });
 
@@ -36,7 +36,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
     return defaultDate;
   };
 
-  const onSubmit = async (goal: FormDataAddGoalForm) => {
+  const onSubmit = async (goal: FormDataAddGoal) => {
     await addGoal(goal);
     router.dismissTo('/');
   };
