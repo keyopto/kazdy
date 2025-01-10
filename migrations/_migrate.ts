@@ -1,8 +1,9 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 import migration1 from './001_migration';
 import migration2 from './002_migration';
+import migration3 from './migration_003';
 
-const MIGRATIONS = [migration1, migration2];
+const MIGRATIONS = [migration1, migration2, migration3];
 
 const getVersion = async (db: SQLiteDatabase): Promise<number> => {
   try {
@@ -38,7 +39,16 @@ const saveVersion = async (db: SQLiteDatabase, newVersion: number) => {
   }
 };
 
+const authorizeForeignKeys = async (db: SQLiteDatabase) => {
+  try {
+    await db.execAsync('PRAGMA foreign_keys = ON;');
+  } catch (e) {
+    throw new Error('Cannot authorize foreign keys', { cause: e });
+  }
+};
+
 const migrateDbIfNeeded = async (db: SQLiteDatabase) => {
+  await authorizeForeignKeys(db);
   const userVersion = await getVersion(db);
   const newVersion = await runMigrations(db, userVersion);
   await saveVersion(db, newVersion);

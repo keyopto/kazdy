@@ -14,6 +14,11 @@
     "d_day": "Jour J :",
     "description": "Description:"
   },
+  "add_milestone": {
+    "title": "Ajout d'une étape",
+    "placeholder_title": "Titre",
+    "placeholder_date": "Date limite"
+  },
   "validation": {
     "title": {
       "required": "Le titre est requis"

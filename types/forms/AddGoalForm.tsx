@@ -11,7 +11,7 @@ const AddGoalForm = (t: (key: string) => string) => {
   });
 };
 
-export type FormDataAddGoalForm = {
+export type FormDataAddGoal = {
   title: string;
   date: Date;
   description: string;

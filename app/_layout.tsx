@@ -40,6 +40,12 @@ export default function RootLayout() {
             title: t('goal_details.title'),
           }}
         />
+        <Screen
+          name="milestone"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     );
   };

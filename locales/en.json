@@ -14,6 +14,11 @@
     "d_day": "D-Day:",
     "description": "Description :"
   },
+  "add_milestone": {
+    "title": "Adding Milestone",
+    "placeholder_title": "Title",
+    "placeholder_date": "Date limite"
+  },
   "validation": {
     "title": {
       "required": "Title is required"

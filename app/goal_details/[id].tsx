@@ -5,12 +5,13 @@ import ThemedView from '@/components/ThemedComponents/ThemedView';
 import useGoals from '@/hooks/useGoals';
 import type { Goal } from '@/types/Goal';
 import formatDate from '@/utils/formatDate';
-import type { UnknownOutputParams } from 'expo-router';
+import { router, type UnknownOutputParams } from 'expo-router';
 import { useLocalSearchParams } from 'expo-router/build/hooks';
 import React, { useEffect, useState } from 'react';
 import { ImageBackground, StyleSheet } from 'react-native';
 import DefaultImage from '@/assets/images/default_goal.jpg';
 import { useTranslation } from 'react-i18next';
+import AddButton from '@/components/AddButton';
 
 export interface GoalDetailsScreenParams extends UnknownOutputParams {
   id: string;
@@ -58,6 +59,15 @@ const GoalDetails = () => {
     return { uri: goal.image };
   };
 
+  const onAddMilestone = () => {
+    router.push({
+      pathname: '/milestone/add',
+      params: {
+        goalId: goal.id.toString(),
+      },
+    });
+  };
+
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.header}>
@@ -73,6 +83,7 @@ const GoalDetails = () => {
         <ThemedText> {t('goal_details.description')}</ThemedText>
         <ThemedText> {goal.description} </ThemedText>
       </ThemedView>
+      <AddButton onPress={onAddMilestone} />
       <ModalBottom isVisible={isModalVisible} dismiss={dismissModal} goal={goal} />
     </ThemedView>
   );
