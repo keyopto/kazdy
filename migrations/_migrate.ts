@@ -1,7 +1,8 @@
 import type { SQLiteDatabase } from 'expo-sqlite';
 import migration1 from './001_migration';
+import migration2 from './002_migration';
 
-const MIGRATIONS = [migration1];
+const MIGRATIONS = [migration1, migration2];
 
 const getVersion = async (db: SQLiteDatabase): Promise<number> => {
   try {

@@ -13,11 +13,12 @@ export const selectAllGoals = async () => {
 export const insertGoal = async (goal: FormDataAddGoalForm): Promise<number> => {
   const result = await db.runAsync(
     `
-  INSERT INTO goal (title, date, description) 
-  VALUES (?, ?, ?)`,
+  INSERT INTO goal (title, date, description, image) 
+  VALUES (?, ?, ?, ?)`,
     goal.title,
     goal.date.toISOString(),
-    goal.description
+    goal.description,
+    goal.image ? goal.image : null
   );
 
   return result.lastInsertRowId;

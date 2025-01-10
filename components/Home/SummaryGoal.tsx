@@ -25,9 +25,16 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
     });
   };
 
+  const getSourceImage = () => {
+    if (!goal.image) {
+      return DefaultImage;
+    }
+    return { uri: goal.image };
+  };
+
   return (
     <ThemedPressable onPress={goToDetails} style={styles.container}>
-      <ImageBackground source={DefaultImage} style={styles.image}>
+      <ImageBackground source={getSourceImage()} style={styles.image}>
         <ThemedView style={styles.titleContainer}>
           <ThemedText style={styles.title}>{goal.title}</ThemedText>
         </ThemedView>

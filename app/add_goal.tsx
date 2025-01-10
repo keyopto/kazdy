@@ -10,6 +10,7 @@ import ControllerDatePicker from '@/components/ControllerInputs/ControllerDatePi
 import ThemedButton from '@/components/ThemedComponents/ThemedButton';
 import { router } from 'expo-router';
 import useGoals from '@/hooks/useGoals';
+import ControllerImagePicker from '@/components/ControllerInputs/ControllerImagePicker';
 
 export type AddGoalProps = {
   __placeholder?: never;
@@ -48,6 +49,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
         placeholder={t('add_goal.placeholder_title')}
         error={errors.title}
       />
+      <ControllerImagePicker control={control} name="image" error={errors.image} />
       <ControllerDatePicker
         control={control}
         name="date"

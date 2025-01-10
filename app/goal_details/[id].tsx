@@ -51,13 +51,20 @@ const GoalDetails = () => {
     return <ThemedView />;
   }
 
+  const getSourceImage = () => {
+    if (!goal.image) {
+      return DefaultImage;
+    }
+    return { uri: goal.image };
+  };
+
   return (
     <ThemedView style={styles.container}>
       <ThemedView style={styles.header}>
         <ThemedText style={styles.title}> {goal.title}</ThemedText>
         <MoreButton onPress={openModal} />
       </ThemedView>
-      <ImageBackground source={DefaultImage} style={styles.image} />
+      <ImageBackground source={getSourceImage()} style={styles.image} />
       <ThemedView style={styles.dateContainer}>
         <ThemedText style={styles.dDay}> {t('goal_details.d_day')} </ThemedText>
         <ThemedText style={styles.date}> {formatDate(goal.date)} </ThemedText>
