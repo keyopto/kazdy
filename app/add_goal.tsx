@@ -18,7 +18,7 @@ export type AddGoalProps = {
 
 const AddGoal: React.FC<AddGoalProps> = () => {
   const { t } = useTranslation();
-  const { addGoal } = useGoals();
+  const { addGoal } = useGoals({});
 
   const {
     control,
@@ -65,7 +65,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
         error={errors.description}
       />
 
-      <ThemedButton title="Submit" onPress={handleSubmit(onSubmit)} />
+      <ThemedButton type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
     </ThemedView>
   );
 };

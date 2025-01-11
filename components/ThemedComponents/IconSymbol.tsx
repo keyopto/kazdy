@@ -10,6 +10,7 @@ const MAPPING = {
   'bin.xmark.fill': 'delete',
   'calendar.circle.fill': 'edit-calendar',
   plus: 'add',
+  checklist: 'check',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

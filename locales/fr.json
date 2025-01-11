@@ -12,7 +12,9 @@
   "goal_details": {
     "title": "Détails du goal",
     "d_day": "Jour J :",
-    "description": "Description:"
+    "description": "Description:",
+    "change_status": "Changer Status",
+    "status_question": "Votre objectif est-il complété ou abandonné?"
   },
   "add_milestone": {
     "title": "Ajout d'une étape",

@@ -6,6 +6,7 @@ import ThemedText from '../ThemedComponents/ThemedText';
 import DefaultImage from '@/assets/images/default_goal.jpg';
 import formatDate from '@/utils/formatDate';
 import { useTranslation } from 'react-i18next';
+import StatusDisplayer from './StatusDisplayer';
 
 export type HeaderGoalDetailsProps = {
   goal: Goal;
@@ -23,7 +24,9 @@ const HeaderGoalDetails: React.FC<HeaderGoalDetailsProps> = ({ goal }) => {
 
   return (
     <ThemedView>
-      <ImageBackground source={getSourceImage()} style={styles.image} />
+      <ImageBackground source={getSourceImage()} style={styles.image}>
+        <StatusDisplayer goal={goal} />
+      </ImageBackground>
       <ThemedView style={styles.dateContainer}>
         <ThemedText style={styles.dDay}> {t('goal_details.d_day')} </ThemedText>
         <ThemedText style={styles.date}> {formatDate(goal.date)} </ThemedText>

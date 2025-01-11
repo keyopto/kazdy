@@ -1,11 +1,14 @@
 import { createSelector } from '@reduxjs/toolkit';
 import type { RootState } from '../store';
 
-export const selectorMilestonesFromGoalId = (goalId: number) => {
+export const selectorMilestonesFromGoalId = (goalId: number | undefined) => {
   return createSelector(
     (state: RootState) => state.milestones.list,
-    (milestones) =>
-      milestones
+    (milestones) => {
+      if (!goalId) {
+        return milestones;
+      }
+      return milestones
         .filter((milestone) => {
           return milestone.goalId === goalId;
         })
@@ -14,6 +17,7 @@ export const selectorMilestonesFromGoalId = (goalId: number) => {
             ...milestone,
             date: new Date(milestone.date),
           };
-        })
+        });
+    }
   );
 };

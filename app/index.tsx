@@ -10,7 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet } from 'react-native';
 
 export default function Index() {
-  const { goals } = useGoals();
+  const { goals } = useGoals({});
 
   const { t } = useTranslation();
 

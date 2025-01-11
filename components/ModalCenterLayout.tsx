@@ -1,19 +1,16 @@
 import React, { type ReactNode } from 'react';
-import ThemedView from './ThemedComponents/ThemedView';
 import { Modal, StyleSheet } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import ThemedPressable from './ThemedComponents/ThemedPressable';
+import ThemedView from './ThemedComponents/ThemedView';
 import ThemedIconSymbol from './ThemedComponents/ThemedIconSymbol';
 
-export type ModalBottomLayoutProps = {
+export type ModalCenterLayoutProps = {
   isVisible: boolean;
   dismiss: () => void;
   children?: ReactNode;
 };
 
-const ModalBottomLayout: React.FC<ModalBottomLayoutProps> = ({ isVisible, dismiss, children }) => {
-  const { bottom, right, left } = useSafeAreaInsets();
-
+const ModalCenterLayout: React.FC<ModalCenterLayoutProps> = ({ isVisible, dismiss, children }) => {
   return (
     <Modal visible={isVisible} transparent={true}>
       <ThemedPressable
@@ -22,14 +19,8 @@ const ModalBottomLayout: React.FC<ModalBottomLayoutProps> = ({ isVisible, dismis
         themeColor="background_transparent"
       >
         <ThemedView
-          style={[
-            {
-              paddingBottom: 20 + bottom,
-              paddingLeft: 20 + left,
-              paddingRight: 20 + right,
-            },
-            styles.modalContainer,
-          ]}
+          safeArea
+          style={styles.modalContainer}
           onStartShouldSetResponder={() => true}
           themeColor="modal_bottom_color"
         >
@@ -45,19 +36,19 @@ const ModalBottomLayout: React.FC<ModalBottomLayoutProps> = ({ isVisible, dismis
   );
 };
 
-export default ModalBottomLayout;
+export default ModalCenterLayout;
 
 const styles = StyleSheet.create({
   background: {
     flex: 1,
-    flexDirection: 'column-reverse',
+    justifyContent: 'center',
+    paddingHorizontal: 20,
   },
   barClose: {
     flexDirection: 'row-reverse',
   },
   modalContainer: {
-    borderTopLeftRadius: 15,
-    borderTopRightRadius: 15,
+    borderRadius: 15,
     opacity: 1,
     padding: 20,
   },

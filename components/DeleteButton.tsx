@@ -1,33 +1,21 @@
 import React from 'react';
-import { StyleSheet, type PressableProps } from 'react-native';
-import ThemedIconSymbol from './ThemedComponents/ThemedIconSymbol';
-import ThemedPressable from './ThemedComponents/ThemedPressable';
-import ThemedText from './ThemedComponents/ThemedText';
+import { type PressableProps } from 'react-native';
 import { useTranslation } from 'react-i18next';
+import ThemedButton from './ThemedComponents/ThemedButton';
 
 export type DeleteButtonProps = PressableProps;
 
-const DeleteButton: React.FC<DeleteButtonProps> = ({ style, ...rest }) => {
+const DeleteButton: React.FC<DeleteButtonProps> = ({ ...rest }) => {
   const { t } = useTranslation();
 
   return (
-    <ThemedPressable
-      style={(props) => [styles.container, typeof style === 'function' ? style(props) : style]}
-      themeColor="transparent"
+    <ThemedButton
+      title={t('general.delete')}
+      iconName="bin.xmark.fill"
+      themeTextColor="text_error"
       {...rest}
-    >
-      <ThemedIconSymbol name="bin.xmark.fill" themeColor="text_error" size={26} />
-      <ThemedText themeColor="text_error">{t('general.delete')}</ThemedText>
-    </ThemedPressable>
+    />
   );
 };
 
 export default DeleteButton;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    gap: 10,
-  },
-});

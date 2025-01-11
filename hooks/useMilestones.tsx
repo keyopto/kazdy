@@ -14,7 +14,7 @@ export type useMilestonesType = {
   addMilestone: (milestone: FormDataAddMilestone & { goalId: number }) => Promise<void>;
 };
 
-const useMilestones = (goalId: number): useMilestonesType => {
+const useMilestones = (goalId?: number): useMilestonesType => {
   const dispatch = useAppDispatch();
   const milestones = useAppSelector(selectorMilestonesFromGoalId(goalId));
   const loading = useAppSelector((state) => state.milestones.loading);

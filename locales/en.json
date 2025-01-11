@@ -12,7 +12,9 @@
   "goal_details": {
     "title": "Goal Details",
     "d_day": "D-Day:",
-    "description": "Description :"
+    "description": "Description :",
+    "change_status": "Change Status",
+    "status_question": "Was your goal completed or given up?"
   },
   "add_milestone": {
     "title": "Adding Milestone",

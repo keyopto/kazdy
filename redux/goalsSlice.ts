@@ -1,9 +1,9 @@
 import { selectAllGoals } from '@/db/goalsDB';
-import type { Goal } from '@/types/Goal';
+import type { GoalRedux } from '@/types/Goal';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface GoalState {
-  list: Goal[];
+  list: GoalRedux[];
   loading: boolean;
   error: string | null;
 }
@@ -14,7 +14,7 @@ const initialState: GoalState = {
   error: null,
 };
 
-export const fetchGoals = createAsyncThunk<Goal[]>('goals/getAll', async () => {
+export const fetchGoals = createAsyncThunk<GoalRedux[]>('goals/getAll', async () => {
   return selectAllGoals();
 });
 
@@ -22,7 +22,7 @@ const goalsSlice = createSlice({
   name: 'goals',
   initialState,
   reducers: {
-    addGoalRedux(state, action: PayloadAction<Goal>) {
+    addGoalRedux(state, action: PayloadAction<GoalRedux>) {
       state.list.push(action.payload);
     },
     removeGoalRedux(state, action: PayloadAction<number>) {
@@ -31,6 +31,13 @@ const goalsSlice = createSlice({
         throw new Error('Cannot remove goal : not found id');
       }
       state.list.splice(index, 1);
+    },
+    modifyGoalRedux(state, action: PayloadAction<GoalRedux>) {
+      const index = state.list.findIndex((goal) => goal.id === action.payload.id);
+      if (index === -1) {
+        throw new Error('Cannot remove goal : not found id');
+      }
+      state.list[index] = { ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -50,5 +57,5 @@ const goalsSlice = createSlice({
   },
 });
 
-export const { addGoalRedux, removeGoalRedux } = goalsSlice.actions;
+export const { addGoalRedux, removeGoalRedux, modifyGoalRedux } = goalsSlice.actions;
 export default goalsSlice.reducer;

@@ -3,15 +3,15 @@ import MoreButton from '@/components/MoreButton';
 import ThemedText from '@/components/ThemedComponents/ThemedText';
 import ThemedView from '@/components/ThemedComponents/ThemedView';
 import useGoals from '@/hooks/useGoals';
-import type { Goal } from '@/types/Goal';
 import { router, type UnknownOutputParams } from 'expo-router';
 import { useLocalSearchParams } from 'expo-router/build/hooks';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { FlatList, StyleSheet } from 'react-native';
 import AddButton from '@/components/AddButton';
 import useMilestones from '@/hooks/useMilestones';
 import SummaryMilestone from '@/components/GoalDetails/SummaryMilestone';
 import HeaderGoalDetails from '@/components/GoalDetails/HeaderGoalDetails';
+import ModalChangeStatus from '@/components/GoalDetails/ModalChangeStatus';
 
 export interface GoalDetailsScreenParams extends UnknownOutputParams {
   id: string;
@@ -19,39 +19,34 @@ export interface GoalDetailsScreenParams extends UnknownOutputParams {
 
 const GoalDetails = () => {
   const { id } = useLocalSearchParams<GoalDetailsScreenParams>();
-  const { getGoalById } = useGoals();
-  const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
+  const { goals } = useGoals({ id: Number(id) });
+  const [isModalBottomVisible, setIsModalBottomVisible] = useState<boolean>(false);
+  const [isModalChangeStatusVisible, setIsModalChangeStatusVisible] = useState<boolean>(false);
 
   const { milestones } = useMilestones(Number(id));
 
-  const [goal, setGoal] = useState<Goal>();
-
   const openModal = () => {
-    setIsModalVisible(true);
+    setIsModalBottomVisible(true);
   };
 
   const dismissModal = () => {
-    setIsModalVisible(false);
+    setIsModalBottomVisible(false);
   };
 
-  const setup = async () => {
-    const goalFromDB = await getGoalById(Number(id));
-
-    if (!goalFromDB) {
-      throw new Error('goal not found in db');
-    }
-
-    setGoal(goalFromDB);
+  const onChangeStatus = () => {
+    setIsModalChangeStatusVisible(true);
   };
 
-  useEffect(() => {
-    setup();
-  }, [id]);
+  const dismissChangeStatusModal = () => {
+    setIsModalChangeStatusVisible(false);
+  };
 
-  if (!goal) {
+  if (!goals || !goals[0]) {
     //TODO loading
     return <ThemedView />;
   }
+
+  const goal = goals[0];
 
   const onAddMilestone = () => {
     router.push({
@@ -80,7 +75,17 @@ const GoalDetails = () => {
         showsVerticalScrollIndicator={false}
       />
       <AddButton onPress={onAddMilestone} />
-      <ModalBottom isVisible={isModalVisible} dismiss={dismissModal} goal={goal} />
+      <ModalBottom
+        onChangeStatus={onChangeStatus}
+        isVisible={isModalBottomVisible}
+        dismiss={dismissModal}
+        goal={goal}
+      />
+      <ModalChangeStatus
+        isVisible={isModalChangeStatusVisible}
+        dismiss={dismissChangeStatusModal}
+        goal={goal}
+      />
     </ThemedView>
   );
 };

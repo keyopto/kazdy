@@ -1,16 +1,17 @@
 import db from '@/constants/db';
-import type { FormDataAddGoalForm } from '@/types/forms/AddGoalForm';
-import type { Goal } from '@/types/Goal';
+import type GoalStatus from '@/enums/GoalStatus';
+import type { FormDataAddGoal } from '@/types/forms/AddGoalForm';
+import type { GoalRedux } from '@/types/Goal';
 
 export const selectGoalFromId = async (id: number) => {
-  return await db.getFirstAsync<Goal>('SELECT * FROM goal WHERE id = ?', id);
+  return await db.getFirstAsync<GoalRedux>('SELECT * FROM goal WHERE id = ?', id);
 };
 
 export const selectAllGoals = async () => {
-  return await db.getAllAsync<Goal>('SELECT * FROM goal');
+  return await db.getAllAsync<GoalRedux>('SELECT * FROM goal');
 };
 
-export const insertGoal = async (goal: FormDataAddGoalForm): Promise<number> => {
+export const insertGoal = async (goal: FormDataAddGoal): Promise<number> => {
   const result = await db.runAsync(
     `
   INSERT INTO goal (title, date, description, image) 
@@ -26,4 +27,16 @@ export const insertGoal = async (goal: FormDataAddGoalForm): Promise<number> => 
 
 export const deleteGoal = async (goalId: number): Promise<void> => {
   await db.runAsync(`DELETE FROM goal WHERE id = ?`, goalId);
+};
+
+export const updateStatus = async (goalId: number, status: GoalStatus) => {
+  await db.runAsync(
+    `
+  UPDATE goal
+  SET status = ?
+  WHERE id = ?
+  `,
+    status,
+    goalId
+  );
 };

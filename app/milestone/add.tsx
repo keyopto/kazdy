@@ -21,7 +21,7 @@ const MilestoneAdd = () => {
 
   const { t } = useTranslation();
 
-  const { addMilestone } = useMilestones();
+  const { addMilestone } = useMilestones(Number(goalId));
 
   const {
     control,
@@ -54,7 +54,7 @@ const MilestoneAdd = () => {
         mode="date"
         error={errors.date}
       />
-      <ThemedButton title="Submit" onPress={handleSubmit(onSubmit)} />
+      <ThemedButton type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
     </ThemedView>
   );
 };
