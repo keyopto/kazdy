@@ -21,6 +21,9 @@
     "placeholder_title": "Title",
     "placeholder_date": "Date limite"
   },
+  "pep_talk_list": {
+    "title": "Pep talks"
+  },
   "validation": {
     "title": {
       "required": "Title is required"

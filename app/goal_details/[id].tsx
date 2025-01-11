@@ -95,6 +95,7 @@ const GoalDetails = () => {
         isVisible={isModalBottomVisible}
         dismiss={dismissBottomModal}
         onDeleteGoal={openModalDelete}
+        goal={goal}
       />
       <ModalChangeStatus
         isVisible={isModalChangeStatusVisible}

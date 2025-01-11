@@ -46,6 +46,12 @@ export default function RootLayout() {
             headerShown: false,
           }}
         />
+        <Screen
+          name="pep_talk"
+          options={{
+            headerShown: false,
+          }}
+        />
       </Stack>
     );
   };

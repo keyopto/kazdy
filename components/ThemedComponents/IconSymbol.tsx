@@ -11,6 +11,8 @@ const MAPPING = {
   'calendar.circle.fill': 'edit-calendar',
   plus: 'add',
   checklist: 'check',
+  mic: 'mic',
+  'audio.jack.mono': 'multitrack-audio',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

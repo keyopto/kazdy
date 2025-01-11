@@ -14,12 +14,16 @@
     "d_day": "Jour J :",
     "description": "Description:",
     "change_status": "Changer Status",
-    "status_question": "Votre objectif est-il complété ou abandonné?"
+    "status_question": "Votre objectif est-il complété ou abandonné?",
+    "pep_talk": "Encouragements vocaux"
   },
   "add_milestone": {
     "title": "Ajout d'une étape",
     "placeholder_title": "Titre",
     "placeholder_date": "Date limite"
+  },
+  "pep_talk_list": {
+    "title": "Encouragements vocaux"
   },
   "validation": {
     "title": {
