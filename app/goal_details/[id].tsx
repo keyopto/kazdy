@@ -12,6 +12,7 @@ import useMilestones from '@/hooks/useMilestones';
 import SummaryMilestone from '@/components/GoalDetails/SummaryMilestone';
 import HeaderGoalDetails from '@/components/GoalDetails/HeaderGoalDetails';
 import ModalChangeStatus from '@/components/GoalDetails/ModalChangeStatus';
+import ModalDelete from '@/components/ModalDelete';
 
 export interface GoalDetailsScreenParams extends UnknownOutputParams {
   id: string;
@@ -19,17 +20,18 @@ export interface GoalDetailsScreenParams extends UnknownOutputParams {
 
 const GoalDetails = () => {
   const { id } = useLocalSearchParams<GoalDetailsScreenParams>();
-  const { goals } = useGoals({ id: Number(id) });
+  const { goals, removeGoal } = useGoals({ id: Number(id) });
   const [isModalBottomVisible, setIsModalBottomVisible] = useState<boolean>(false);
   const [isModalChangeStatusVisible, setIsModalChangeStatusVisible] = useState<boolean>(false);
+  const [isModalDeleteVisible, setIsModalDeleteVisible] = useState<boolean>(false);
 
   const { milestones } = useMilestones(Number(id));
 
-  const openModal = () => {
+  const openBottomModal = () => {
     setIsModalBottomVisible(true);
   };
 
-  const dismissModal = () => {
+  const dismissBottomModal = () => {
     setIsModalBottomVisible(false);
   };
 
@@ -41,12 +43,25 @@ const GoalDetails = () => {
     setIsModalChangeStatusVisible(false);
   };
 
+  const openModalDelete = () => {
+    setIsModalDeleteVisible(true);
+  };
+
+  const dismissModalDelete = () => {
+    setIsModalDeleteVisible(false);
+  };
+
   if (!goals || !goals[0]) {
     //TODO loading
     return <ThemedView />;
   }
 
   const goal = goals[0];
+
+  const onDeleteGoal = async () => {
+    await removeGoal(goal.id);
+    router.dismissTo('/');
+  };
 
   const onAddMilestone = () => {
     router.push({
@@ -61,7 +76,7 @@ const GoalDetails = () => {
     <ThemedView style={styles.container}>
       <ThemedView style={styles.header}>
         <ThemedText style={styles.title}> {goal.title}</ThemedText>
-        <MoreButton onPress={openModal} />
+        <MoreButton onPress={openBottomModal} />
       </ThemedView>
 
       <FlatList
@@ -78,13 +93,18 @@ const GoalDetails = () => {
       <ModalBottom
         onChangeStatus={onChangeStatus}
         isVisible={isModalBottomVisible}
-        dismiss={dismissModal}
-        goal={goal}
+        dismiss={dismissBottomModal}
+        onDeleteGoal={openModalDelete}
       />
       <ModalChangeStatus
         isVisible={isModalChangeStatusVisible}
         dismiss={dismissChangeStatusModal}
         goal={goal}
+      />
+      <ModalDelete
+        isVisible={isModalDeleteVisible}
+        dismiss={dismissModalDelete}
+        onDelete={onDeleteGoal}
       />
     </ThemedView>
   );

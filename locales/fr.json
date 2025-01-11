@@ -33,6 +33,7 @@
     }
   },
   "general": {
-    "delete": "Supprimer"
+    "delete": "Supprimer",
+    "delete_question": "Souhaitez-vous vraiment supprimer cet élément ?"
   }
 }

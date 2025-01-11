@@ -1,28 +1,27 @@
 import React from 'react';
 import ModalBottomLayout from '../ModalBottomLayout';
-import type { Goal } from '@/types/Goal';
-import { router } from 'expo-router';
 import DeleteButton from '../DeleteButton';
-import useGoals from '@/hooks/useGoals';
 import ThemedButton from '../ThemedComponents/ThemedButton';
 import { useTranslation } from 'react-i18next';
 
 export type ModalBottomProps = {
   isVisible: boolean;
   dismiss: () => void;
-  goal: Goal;
   onChangeStatus: () => void;
+  onDeleteGoal: () => void;
 };
 
-const ModalBottom: React.FC<ModalBottomProps> = ({ isVisible, dismiss, goal, onChangeStatus }) => {
+const ModalBottom: React.FC<ModalBottomProps> = ({
+  isVisible,
+  dismiss,
+  onChangeStatus,
+  onDeleteGoal,
+}) => {
   const { t } = useTranslation();
 
-  const { removeGoal } = useGoals({});
-
-  const onDeleteGoal = async () => {
-    await removeGoal(goal.id);
+  const onPressDeleteGoal = () => {
     dismiss();
-    router.dismissTo('/');
+    onDeleteGoal();
   };
 
   const onPressChangeStatus = () => {
@@ -37,7 +36,7 @@ const ModalBottom: React.FC<ModalBottomProps> = ({ isVisible, dismiss, goal, onC
         iconName="checklist"
         title={t('goal_details.change_status')}
       />
-      <DeleteButton onPress={onDeleteGoal} />
+      <DeleteButton onPress={onPressDeleteGoal} />
     </ModalBottomLayout>
   );
 };
