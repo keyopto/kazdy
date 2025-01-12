@@ -40,3 +40,15 @@ export const updateStatus = async (goalId: number, status: GoalStatus) => {
     goalId
   );
 };
+
+export const updateGoalNotification = async (goalId: number, idNotification: string | null) => {
+  await db.runAsync(
+    `
+  UPDATE goal
+  SET notificationId = ?
+  WHERE id = ?
+  `,
+    idNotification,
+    goalId
+  );
+};

@@ -4,8 +4,9 @@ import migration2 from './002_migration';
 import migration3 from './migration_003';
 import migration4 from './migration_004';
 import migration5 from './migration_005';
+import migration6 from './migration_006';
 
-const MIGRATIONS = [migration1, migration2, migration3, migration4, migration5];
+const MIGRATIONS = [migration1, migration2, migration3, migration4, migration5, migration6];
 
 const getVersion = async (db: SQLiteDatabase): Promise<number> => {
   try {

@@ -4,9 +4,17 @@ import { useAppSelector } from './useAppSelector';
 import { addGoalRedux, fetchGoals, modifyGoalRedux, removeGoalRedux } from '@/redux/goalsSlice';
 import type { Goal } from '@/types/Goal';
 import type { FormDataAddGoal } from '@/types/forms/AddGoalForm';
-import { deleteGoal, insertGoal, selectGoalFromId, updateStatus } from '@/db/goalsDB';
+import {
+  deleteGoal,
+  insertGoal,
+  selectGoalFromId,
+  updateGoalNotification,
+  updateStatus,
+} from '@/db/goalsDB';
 import { selectorGoals } from '@/redux/selectors/goalSelector';
 import type GoalStatus from '@/enums/GoalStatus';
+import useNotifications from './useNotifications';
+import NotificationType from '@/enums/NotificationType';
 
 export type useGoalsType = {
   goals: Goal[];
@@ -19,6 +27,8 @@ export type useGoalsType = {
 };
 
 const useGoals = ({ id }: { id?: number }): useGoalsType => {
+  const { scheduleNewNotification } = useNotifications();
+
   const dispatch = useAppDispatch();
   const goals = useAppSelector(selectorGoals(id));
   const loading = useAppSelector((state) => state.goals.loading);
@@ -32,6 +42,17 @@ const useGoals = ({ id }: { id?: number }): useGoalsType => {
 
   const addGoal = async (goal: FormDataAddGoal) => {
     const idInserted = await insertGoal(goal);
+
+    const idNotification = await scheduleNewNotification(
+      NotificationType.GOAL,
+      idInserted,
+      goal.date
+    );
+
+    if (idNotification) {
+      await updateGoalNotification(idInserted, idNotification);
+    }
+
     const goalAdded = await selectGoalFromId(idInserted);
     if (!goalAdded) {
       throw new Error('Goal was not inserted');

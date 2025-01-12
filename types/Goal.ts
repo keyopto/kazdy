@@ -7,6 +7,7 @@ export type Goal = {
   description: string;
   image: string | null;
   status: GoalStatus;
+  notificationId: number | null;
 };
 
 export type GoalRedux = {
@@ -16,4 +17,5 @@ export type GoalRedux = {
   image: string | null;
   status: GoalStatus;
   date: string;
+  notificationId: number | null;
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Stack } from 'expo-router';
 import { Screen } from 'expo-router/build/views/Screen';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
@@ -10,11 +10,24 @@ import { SQLiteProvider } from 'expo-sqlite';
 import migrateDbIfNeeded from '@/migrations/_migrate';
 import { Provider } from 'react-redux';
 import { store } from '@/redux/store';
+import * as Notifications from 'expo-notifications';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
 
   const { t } = useTranslation();
+
+  useEffect(() => {
+    (async () => {
+      await Notifications.requestPermissionsAsync();
+    })();
+
+    const responseListener = Notifications.addNotificationResponseReceivedListener(() => {});
+
+    return () => {
+      responseListener.remove();
+    };
+  }, []);
 
   const getStack = () => {
     return (
