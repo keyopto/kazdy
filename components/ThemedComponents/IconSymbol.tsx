@@ -13,6 +13,8 @@ const MAPPING = {
   checklist: 'check',
   mic: 'mic',
   'audio.jack.mono': 'multitrack-audio',
+  play: 'play-arrow',
+  stop: 'stop',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],
