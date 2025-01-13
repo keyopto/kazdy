@@ -15,6 +15,7 @@ export type ControllerTextInputProps<TFieldValues extends FieldValues> = {
   name: Path<TFieldValues>;
   error: FieldError | undefined;
   placeholder?: string;
+  label?: string;
 };
 
 const ControllerTextInput = <TFieldValues extends FieldValues>({
@@ -22,6 +23,7 @@ const ControllerTextInput = <TFieldValues extends FieldValues>({
   name,
   error,
   placeholder,
+  label,
 }: ControllerTextInputProps<TFieldValues>) => {
   return (
     <Controller
@@ -35,6 +37,7 @@ const ControllerTextInput = <TFieldValues extends FieldValues>({
               setValue={onChange}
               placeholder={placeholder}
               isError={!!error}
+              label={label}
             />
             <ErrorMessage message={error?.message || undefined} />
           </View>

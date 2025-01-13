@@ -48,12 +48,14 @@ const AddGoal: React.FC<AddGoalProps> = () => {
         name="title"
         placeholder={t('add_goal.placeholder_title')}
         error={errors.title}
+        label={t('add_goal.label_title')}
       />
       <ControllerImagePicker control={control} name="image" error={errors.image} />
       <ControllerDatePicker
         control={control}
         name="date"
         placeholder={t('add_goal.placeholder_date')}
+        label={t('add_goal.label_date')}
         mode="date"
         error={errors.date}
         defaultDate={getDefaultDate()}
@@ -63,6 +65,7 @@ const AddGoal: React.FC<AddGoalProps> = () => {
         name="description"
         placeholder={t('add_goal.placeholder_description')}
         error={errors.description}
+        label={t('add_goal.label_description')}
       />
 
       <ThemedButton type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />

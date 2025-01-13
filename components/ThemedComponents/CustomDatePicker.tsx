@@ -5,6 +5,7 @@ import ThemedText from './ThemedText';
 import { StyleSheet } from 'react-native';
 import useThemeColor from '@/hooks/useThemeColor';
 import ThemedIconSymbol from './ThemedIconSymbol';
+import ThemedView from './ThemedView';
 
 export type CustomDatePickerProps = {
   date: Date | undefined;
@@ -13,6 +14,7 @@ export type CustomDatePickerProps = {
   mode: 'date' | 'time';
   placeholder?: string;
   isError?: boolean;
+  label?: string;
 };
 
 const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
@@ -22,6 +24,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
   mode,
   placeholder = '',
   isError,
+  label,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState<boolean>(false);
 
@@ -65,14 +68,25 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
     setIsModalVisible(true);
   };
 
+  const getLabel = () => {
+    if (!label) {
+      return;
+    }
+
+    return <ThemedText> {label} </ThemedText>;
+  };
+
   return (
-    <ThemedPressable onPress={onPress} style={[{ borderColor }, styles.container]}>
-      <ThemedIconSymbol name="calendar" size={18} />
-      <ThemedText lightColor={color} darkColor={color}>
-        {formatDate(date)}
-      </ThemedText>
-      {getModalPicker()}
-    </ThemedPressable>
+    <ThemedView style={styles.container}>
+      {getLabel()}
+      <ThemedPressable onPress={onPress} style={[{ borderColor }, styles.containerInput]}>
+        <ThemedIconSymbol name="calendar" size={18} />
+        <ThemedText lightColor={color} darkColor={color}>
+          {formatDate(date)}
+        </ThemedText>
+        {getModalPicker()}
+      </ThemedPressable>
+    </ThemedView>
   );
 };
 
@@ -80,6 +94,9 @@ export default CustomDatePicker;
 
 const styles = StyleSheet.create({
   container: {
+    gap: 10,
+  },
+  containerInput: {
     alignItems: 'center',
     borderRadius: 8,
     borderWidth: 2,

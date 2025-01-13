@@ -17,6 +17,7 @@ export type ControllerDatePickerProps<TFieldValues extends FieldValues> = {
   mode: 'date' | 'time';
   placeholder?: string;
   defaultDate?: Date;
+  label?: string;
 };
 
 const ControllerDatePicker = <TFieldValues extends FieldValues>({
@@ -26,6 +27,7 @@ const ControllerDatePicker = <TFieldValues extends FieldValues>({
   placeholder,
   mode,
   defaultDate,
+  label,
 }: ControllerDatePickerProps<TFieldValues>) => {
   return (
     <Controller
@@ -41,6 +43,7 @@ const ControllerDatePicker = <TFieldValues extends FieldValues>({
               isError={!!error}
               mode={mode}
               defaultDate={defaultDate}
+              label={label}
             />
             <ErrorMessage message={error?.message || undefined} />
           </View>

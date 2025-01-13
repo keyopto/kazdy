@@ -5,8 +5,11 @@
   },
   "add_goal": {
     "title": "Ajout d'un goal",
+    "label_date": "Date limite",
     "placeholder_date": "Date limite",
+    "label_title": "Titre",
     "placeholder_title": "Titre",
+    "label_description": "Description",
     "placeholder_description": "Description"
   },
   "goal_details": {
@@ -21,7 +24,9 @@
   },
   "add_milestone": {
     "title": "Ajout d'une étape",
+    "label_title": "Titre",
     "placeholder_title": "Titre",
+    "label_date": "Date limite",
     "placeholder_date": "Date limite"
   },
   "pep_talk_list": {
