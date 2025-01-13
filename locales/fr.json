@@ -15,7 +15,9 @@
     "description": "Description:",
     "change_status": "Changer Status",
     "status_question": "Votre objectif est-il complété ou abandonné?",
-    "pep_talk": "Encouragements vocaux"
+    "pep_talk": "Encouragements vocaux",
+    "status_milestone_completed": "Réalisé",
+    "status_milestone_failed": "Abandonné"
   },
   "add_milestone": {
     "title": "Ajout d'une étape",

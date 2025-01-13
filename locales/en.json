@@ -14,7 +14,9 @@
     "d_day": "D-Day:",
     "description": "Description :",
     "change_status": "Change Status",
-    "status_question": "Was your goal completed or given up?"
+    "status_question": "Was your goal completed or given up?",
+    "status_milestone_completed": "Completed",
+    "status_milestone_failed": "Failed"
   },
   "add_milestone": {
     "title": "Adding Milestone",

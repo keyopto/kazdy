@@ -1,27 +1,76 @@
 import type { Milestone } from '@/types/Milestone';
 import React from 'react';
 import ThemedView from '../ThemedComponents/ThemedView';
-import DefaultImage from '@/assets/images/default_goal.jpg';
-import { ImageBackground, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import ThemedText from '../ThemedComponents/ThemedText';
 import formatDate from '@/utils/formatDate';
+import ThemedIconButton from '../ThemedComponents/ThemedIconButton';
+import MilestoneStatus from '@/enums/MilestoneStatus';
+import ThemedIconSymbol from '../ThemedComponents/ThemedIconSymbol';
+import { useTranslation } from 'react-i18next';
+import useMilestones from '@/hooks/useMilestones';
 
 export type SummaryMilestoneProps = {
   milestone: Milestone;
 };
 
 const SummaryMilestone: React.FC<SummaryMilestoneProps> = ({ milestone }) => {
+  const { t } = useTranslation();
+
+  const { changeStatusMilestone } = useMilestones();
+
+  const onChangeStatus = async (status: MilestoneStatus) => {
+    await changeStatusMilestone(milestone, status);
+  };
+
+  const getSecondPart = () => {
+    if (milestone.status === MilestoneStatus.ON_GOING) {
+      return (
+        <ThemedView style={styles.buttons}>
+          <ThemedIconButton
+            style={styles.button_item}
+            iconName="checklist"
+            themeColor="correct"
+            onPress={() => onChangeStatus(MilestoneStatus.COMPLETED)}
+          />
+          <ThemedIconButton
+            style={styles.button_item}
+            iconName="cross.fill"
+            themeColor="text_error"
+            onPress={() => onChangeStatus(MilestoneStatus.GIVEN_UP)}
+          />
+        </ThemedView>
+      );
+    }
+
+    if (milestone.status === MilestoneStatus.COMPLETED) {
+      return (
+        <ThemedView style={styles.status_container}>
+          <ThemedIconSymbol name="checklist" themeColor="correct" />
+          <ThemedText> {t('goal_details.status_milestone_completed')} </ThemedText>
+        </ThemedView>
+      );
+    }
+
+    if (milestone.status === MilestoneStatus.GIVEN_UP) {
+      return (
+        <ThemedView style={styles.status_container}>
+          <ThemedIconSymbol name="cross.fill" themeColor="text_error" />
+          <ThemedText> {t('goal_details.status_milestone_failed')} </ThemedText>
+        </ThemedView>
+      );
+    }
+
+    return null;
+  };
+
   return (
     <ThemedView style={styles.container}>
-      <ImageBackground source={DefaultImage} style={styles.image}>
-        <ThemedView style={styles.titleContainer}>
-          <ThemedText style={styles.title}>{milestone.title}</ThemedText>
-        </ThemedView>
-
-        <ThemedView style={styles.dateContainer}>
-          <ThemedText style={styles.date}>{formatDate(milestone.date)}</ThemedText>
-        </ThemedView>
-      </ImageBackground>
+      <ThemedView style={styles.informationContainer}>
+        <ThemedText style={styles.title}>{milestone.title}</ThemedText>
+        <ThemedText style={styles.date}>Pour le {formatDate(milestone.date)}</ThemedText>
+      </ThemedView>
+      {getSecondPart()}
     </ThemedView>
   );
 };
@@ -29,33 +78,34 @@ const SummaryMilestone: React.FC<SummaryMilestoneProps> = ({ milestone }) => {
 export default SummaryMilestone;
 
 const styles = StyleSheet.create({
+  button_item: {
+    padding: 15,
+  },
+  buttons: {
+    flexDirection: 'row',
+    gap: 5,
+  },
   container: {
+    alignItems: 'center',
     borderRadius: 15,
+    flexDirection: 'row',
     minHeight: 100,
     overflow: 'hidden',
+    padding: 10,
   },
   date: {
     fontWeight: 'bold',
   },
-  dateContainer: {
-    borderRadius: 15,
-    bottom: 10,
-    paddingHorizontal: 10,
-    position: 'absolute',
-    right: 10,
-  },
-  image: {
+  informationContainer: {
     flex: 1,
+    gap: 5,
+  },
+  status_container: {
+    alignItems: 'center',
     flexDirection: 'row',
   },
   title: {
     fontSize: 25,
     fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  titleContainer: {
-    justifyContent: 'center',
-    opacity: 0.7,
-    width: '40%',
   },
 });

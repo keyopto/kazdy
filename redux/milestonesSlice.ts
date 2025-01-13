@@ -1,9 +1,9 @@
 import { selectAllMilestones } from '@/db/milestonesDB';
-import type { Milestone } from '@/types/Milestone';
+import type { MilestoneRedux } from '@/types/Milestone';
 import { createAsyncThunk, createSlice, type PayloadAction } from '@reduxjs/toolkit';
 
 interface MilestoneState {
-  list: Milestone[];
+  list: MilestoneRedux[];
   loading: boolean;
   error: string | null;
 }
@@ -14,16 +14,23 @@ const initialState: MilestoneState = {
   error: null,
 };
 
-export const fetchMilestones = createAsyncThunk<Milestone[]>('milestone/getAll', async () => {
+export const fetchMilestones = createAsyncThunk<MilestoneRedux[]>('milestone/getAll', async () => {
   return await selectAllMilestones();
 });
 
 const milestonesSlice = createSlice({
-  name: 'goals',
+  name: 'milestones',
   initialState,
   reducers: {
-    addMilestoneRedux(state, action: PayloadAction<Milestone>) {
+    addMilestoneRedux(state, action: PayloadAction<MilestoneRedux>) {
       state.list.push(action.payload);
+    },
+    modifyMilestoneRedux(state, action: PayloadAction<MilestoneRedux>) {
+      const index = state.list.findIndex((milestone) => milestone.id === action.payload.id);
+      if (index === -1) {
+        throw new Error('Cannot modify goal : not found id');
+      }
+      state.list[index] = { ...action.payload };
     },
   },
   extraReducers: (builder) => {
@@ -43,5 +50,5 @@ const milestonesSlice = createSlice({
   },
 });
 
-export const { addMilestoneRedux } = milestonesSlice.actions;
+export const { addMilestoneRedux, modifyMilestoneRedux } = milestonesSlice.actions;
 export default milestonesSlice.reducer;

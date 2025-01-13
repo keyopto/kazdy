@@ -1,13 +1,14 @@
 import db from '@/constants/db';
+import type MilestoneStatus from '@/enums/MilestoneStatus';
 import type { FormDataAddMilestone } from '@/types/forms/AddMilestoneForm';
-import { type Milestone } from '@/types/Milestone';
+import { type MilestoneRedux } from '@/types/Milestone';
 
 export const selectMilestoneFromId = async (id: number) => {
-  return await db.getFirstAsync<Milestone>('SELECT * FROM milestone WHERE id = ?', id);
+  return await db.getFirstAsync<MilestoneRedux>('SELECT * FROM milestone WHERE id = ?', id);
 };
 
 export const selectAllMilestones = async () => {
-  return await db.getAllAsync<Milestone>('SELECT * FROM milestone');
+  return await db.getAllAsync<MilestoneRedux>('SELECT * FROM milestone');
 };
 
 export const insertMilestone = async (
@@ -23,4 +24,16 @@ export const insertMilestone = async (
   );
 
   return result.lastInsertRowId;
+};
+
+export const updateMilestoneStatus = async (milestoneId: number, status: MilestoneStatus) => {
+  await db.runAsync(
+    `
+  UPDATE milestone
+  SET status = ?
+  WHERE id = ?
+  `,
+    status,
+    milestoneId
+  );
 };

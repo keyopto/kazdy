@@ -5,19 +5,16 @@ export const selectorMilestonesFromGoalId = (goalId: number | undefined) => {
   return createSelector(
     (state: RootState) => state.milestones.list,
     (milestones) => {
-      if (!goalId) {
-        return milestones;
-      }
-      return milestones
-        .filter((milestone) => {
-          return milestone.goalId === goalId;
-        })
-        .map((milestone) => {
-          return {
-            ...milestone,
-            date: new Date(milestone.date),
-          };
-        });
+      const milestonesFiltered = !goalId
+        ? milestones
+        : milestones.filter((milestone) => milestone.goalId === goalId);
+
+      return milestonesFiltered.map((milestone) => {
+        return {
+          ...milestone,
+          date: new Date(milestone.date),
+        };
+      });
     }
   );
 };
