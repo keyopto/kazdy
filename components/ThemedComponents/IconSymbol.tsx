@@ -4,6 +4,7 @@ import React from 'react';
 import { type OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
 const MAPPING = {
+  house: 'home',
   calendar: 'calendar-month',
   'table.badge.more': 'more-vert',
   'cross.fill': 'close',
@@ -15,6 +16,7 @@ const MAPPING = {
   'audio.jack.mono': 'multitrack-audio',
   play: 'play-arrow',
   stop: 'stop',
+  gear: 'settings',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

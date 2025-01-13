@@ -26,6 +26,9 @@
   "pep_talk_list": {
     "title": "Pep talks"
   },
+  "settings": {
+    "title": "Settings"
+  },
   "validation": {
     "title": {
       "required": "Title is required"

@@ -27,6 +27,9 @@
   "pep_talk_list": {
     "title": "Encouragements vocaux"
   },
+  "settings": {
+    "title": "Options"
+  },
   "validation": {
     "title": {
       "required": "Le titre est requis"
