@@ -7,12 +7,16 @@ export const selectorGoals = (goalId: number | undefined) => {
     (goals) => {
       const goalsFiltered = !goalId ? goals : goals.filter((goal) => goal.id === goalId);
 
-      return goalsFiltered.map((goal) => {
-        return {
-          ...goal,
-          date: new Date(goal.date),
-        };
-      });
+      return goalsFiltered
+        .map((goal) => {
+          return {
+            ...goal,
+            date: new Date(goal.date),
+          };
+        })
+        .sort((a, b) => {
+          return a.date.getTime() - b.date.getTime();
+        });
     }
   );
 };

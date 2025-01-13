@@ -11,12 +11,16 @@ export const selectorPepTalksFromGoalId = (goalId: number | undefined) => {
             return pepTalk.goalId === goalId;
           });
 
-      return filteredPepTalks.map((pepTalk) => {
-        return {
-          ...pepTalk,
-          date: new Date(pepTalk.date),
-        };
-      });
+      return filteredPepTalks
+        .map((pepTalk) => {
+          return {
+            ...pepTalk,
+            date: new Date(pepTalk.date),
+          };
+        })
+        .sort((a, b) => {
+          return a.date.getTime() - b.date.getTime();
+        });
     }
   );
 };
