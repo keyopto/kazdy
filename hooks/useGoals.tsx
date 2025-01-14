@@ -15,6 +15,7 @@ import { selectorGoals } from '@/redux/selectors/goalSelector';
 import type GoalStatus from '@/enums/GoalStatus';
 import useNotifications from './useNotifications';
 import NotificationType from '@/enums/NotificationType';
+import type { GoalFilters } from '@/types/GoalFilters';
 
 export type useGoalsType = {
   goals: Goal[];
@@ -26,11 +27,11 @@ export type useGoalsType = {
   changeStatusGoal: (goal: Goal, status: GoalStatus) => Promise<void>;
 };
 
-const useGoals = ({ id }: { id?: number }): useGoalsType => {
+const useGoals = (filters: GoalFilters): useGoalsType => {
   const { scheduleNewNotification } = useNotifications();
 
   const dispatch = useAppDispatch();
-  const goals = useAppSelector(selectorGoals(id));
+  const goals = useAppSelector(selectorGoals(filters));
   const loading = useAppSelector((state) => state.goals.loading);
   const error = useAppSelector((state) => state.goals.error);
 

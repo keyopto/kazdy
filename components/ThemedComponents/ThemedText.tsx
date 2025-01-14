@@ -6,7 +6,7 @@ import { Text, type TextProps, StyleSheet } from 'react-native';
 export type ThemedTextProps = TextProps & {
   lightColor?: string;
   darkColor?: string;
-  type?: 'default' | 'tab';
+  type?: 'default' | 'tab' | 'title';
   themeColor?: keyof typeof Colors.light & keyof typeof Colors.dark;
 };
 
@@ -26,6 +26,8 @@ const ThemedText: React.FC<ThemedTextProps> = ({
         return styles.default;
       case 'tab':
         return styles.tab;
+      case 'title':
+        return styles.title;
       default:
         return null;
     }
@@ -42,5 +44,9 @@ const styles = StyleSheet.create({
   },
   tab: {
     fontSize: 10,
+  },
+  title: {
+    fontSize: 30,
+    fontWeight: 'bold',
   },
 });

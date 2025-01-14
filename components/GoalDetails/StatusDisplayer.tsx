@@ -8,9 +8,10 @@ import { StyleSheet } from 'react-native';
 
 export type StatusDisplayerProps = {
   goal: Goal;
+  corner?: 'bottom' | 'top';
 };
 
-const StatusDisplayer: React.FC<StatusDisplayerProps> = ({ goal }) => {
+const StatusDisplayer: React.FC<StatusDisplayerProps> = ({ goal, corner = 'bottom' }) => {
   const status = goal.status;
 
   const getIconName = (): IconSymbolName => {
@@ -29,7 +30,10 @@ const StatusDisplayer: React.FC<StatusDisplayerProps> = ({ goal }) => {
   }
 
   return (
-    <ThemedView style={styles.container} themeColor="transparent">
+    <ThemedView
+      style={[corner === 'top' ? styles.top : styles.bottom, styles.container]}
+      themeColor="transparent"
+    >
       <ThemedIconSymbol name={getIconName()} size={40} />
     </ThemedView>
   );
@@ -38,9 +42,14 @@ const StatusDisplayer: React.FC<StatusDisplayerProps> = ({ goal }) => {
 export default StatusDisplayer;
 
 const styles = StyleSheet.create({
-  container: {
+  bottom: {
     bottom: 10,
+  },
+  container: {
     position: 'absolute',
     right: 10,
+  },
+  top: {
+    top: 10,
   },
 });

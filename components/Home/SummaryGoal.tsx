@@ -7,6 +7,7 @@ import { ImageBackground, StyleSheet } from 'react-native';
 import ThemedView from '../ThemedComponents/ThemedView';
 import DefaultImage from '@/assets/images/default_goal.jpg';
 import formatDate from '@/utils/formatDate';
+import StatusDisplayer from '../GoalDetails/StatusDisplayer';
 
 export type SummaryGoalProps = {
   goal: Goal;
@@ -38,6 +39,7 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
         <ThemedView style={styles.dateContainer}>
           <ThemedText style={styles.date}>{formatDate(goal.date)}</ThemedText>
         </ThemedView>
+        <StatusDisplayer goal={goal} corner="top" />
       </ImageBackground>
     </ThemedPressable>
   );

@@ -3,6 +3,7 @@ import SummaryGoal from '@/components/Home/SummaryGoal';
 import ThemedIconSymbol from '@/components/ThemedComponents/ThemedIconSymbol';
 import ThemedText from '@/components/ThemedComponents/ThemedText';
 import ThemedView from '@/components/ThemedComponents/ThemedView';
+import GoalStatus from '@/enums/GoalStatus';
 import useGoals from '@/hooks/useGoals';
 import { useRouter } from 'expo-router';
 import React from 'react';
@@ -10,7 +11,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet } from 'react-native';
 
 export default function Index() {
-  const { goals } = useGoals({});
+  const { goals } = useGoals({ status: GoalStatus.ON_GOING });
 
   const { t } = useTranslation();
 

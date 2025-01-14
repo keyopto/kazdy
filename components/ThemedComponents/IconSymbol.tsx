@@ -17,6 +17,7 @@ const MAPPING = {
   play: 'play-arrow',
   stop: 'stop',
   gear: 'settings',
+  'list.dash': 'list',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

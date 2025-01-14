@@ -25,6 +25,14 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="list_goals"
+        options={{
+          tabBarIcon: () => <ThemedIconSymbol size={30} name="list.dash" />,
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      />
+      <Tabs.Screen
         name="settings"
         options={{
           tabBarIcon: () => <ThemedIconSymbol size={30} name="gear" />,

@@ -14,7 +14,7 @@ const Settings = () => {
 
   return (
     <ThemedView safeArea style={styles.container}>
-      <ThemedText style={styles.title}> {t('settings.title')} </ThemedText>
+      <ThemedText type="title"> {t('settings.title')} </ThemedText>
       <LanguagePicker />
     </ThemedView>
   );
@@ -27,9 +27,5 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     padding: 10,
-  },
-  title: {
-    fontSize: 30,
-    fontWeight: 'bold',
   },
 });
