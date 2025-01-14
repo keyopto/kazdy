@@ -17,7 +17,7 @@ export default function Index() {
   const router = useRouter();
 
   const onPressAdd = () => {
-    router.push('/add_goal');
+    router.push('/goal/add');
   };
 
   const getHeader = () => {

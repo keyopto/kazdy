@@ -4,7 +4,7 @@ import { Screen } from 'expo-router/build/views/Screen';
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
 import { useColorScheme } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import { I18nextProvider, useTranslation } from 'react-i18next';
+import { I18nextProvider } from 'react-i18next';
 import i18n from '@/i18';
 import { SQLiteProvider } from 'expo-sqlite';
 import migrateDbIfNeeded from '@/migrations/_migrate';
@@ -14,8 +14,6 @@ import * as Notifications from 'expo-notifications';
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
-
-  const { t } = useTranslation();
 
   useEffect(() => {
     (async () => {
@@ -45,17 +43,9 @@ export default function RootLayout() {
           }}
         />
         <Screen
-          name="add_goal"
+          name="goal"
           options={{
-            presentation: 'modal',
-            title: t('add_goal.title'),
-          }}
-        />
-        <Screen
-          name="goal_details/[id]"
-          options={{
-            presentation: 'modal',
-            title: t('goal_details.title'),
+            headerShown: false,
           }}
         />
         <Screen

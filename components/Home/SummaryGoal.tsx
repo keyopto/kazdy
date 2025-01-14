@@ -15,7 +15,7 @@ export type SummaryGoalProps = {
 const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
   const goToDetails = () => {
     router.push({
-      pathname: `/goal_details/[id]`,
+      pathname: `/goal/[id]`,
       params: {
         id: goal.id.toString(),
       },
@@ -35,7 +35,6 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
         <ThemedView style={styles.titleContainer}>
           <ThemedText style={styles.title}>{goal.title}</ThemedText>
         </ThemedView>
-
         <ThemedView style={styles.dateContainer}>
           <ThemedText style={styles.date}>{formatDate(goal.date)}</ThemedText>
         </ThemedView>
