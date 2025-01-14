@@ -1,8 +1,9 @@
 import SummaryGoal from '@/components/Home/SummaryGoal';
+import SearchBar from '@/components/SearchBar';
 import ThemedText from '@/components/ThemedComponents/ThemedText';
 import ThemedView from '@/components/ThemedComponents/ThemedView';
 import useGoals from '@/hooks/useGoals';
-import React from 'react';
+import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet } from 'react-native';
 
@@ -11,12 +12,18 @@ export type ListGoalsScreenParams = {
 };
 
 const ListGoals = () => {
-  const { goals } = useGoals({});
+  const [searchText, setSearchText] = useState<string>('');
+  const { goals } = useGoals({ title: searchText });
   const { t } = useTranslation();
 
   return (
     <ThemedView safeArea style={styles.container}>
       <ThemedText type="title"> {t('list_goals.title')}</ThemedText>
+      <SearchBar
+        value={searchText}
+        setValue={setSearchText}
+        placeholder={t('list_goals.placeholder_search')}
+      />
       <FlatList
         data={goals}
         contentContainerStyle={styles.flatList}

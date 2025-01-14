@@ -33,7 +33,8 @@
     "title": "Encouragements vocaux"
   },
   "list_goals": {
-    "title": "Tous les objectifs"
+    "title": "Tous les objectifs",
+    "placeholder_search": "Nom de l'objectif"
   },
   "settings": {
     "title": "Options"

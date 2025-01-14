@@ -13,13 +13,13 @@ export default function TabLayout() {
           alignItems: 'center',
           flex: 1,
         },
+        headerShown: false,
       }}
     >
       <Tabs.Screen
         name="index"
         options={{
           tabBarIcon: () => <ThemedIconSymbol size={30} name="house" />,
-          headerShown: false,
           tabBarShowLabel: false,
           title: t('home.title'),
         }}
@@ -28,7 +28,6 @@ export default function TabLayout() {
         name="list_goals"
         options={{
           tabBarIcon: () => <ThemedIconSymbol size={30} name="list.dash" />,
-          headerShown: false,
           tabBarShowLabel: false,
         }}
       />
@@ -36,7 +35,6 @@ export default function TabLayout() {
         name="settings"
         options={{
           tabBarIcon: () => <ThemedIconSymbol size={30} name="gear" />,
-          headerShown: false,
           tabBarShowLabel: false,
         }}
       />

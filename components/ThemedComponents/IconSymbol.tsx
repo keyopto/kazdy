@@ -18,6 +18,7 @@ const MAPPING = {
   stop: 'stop',
   gear: 'settings',
   'list.dash': 'list',
+  magnifyingglass: 'search',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

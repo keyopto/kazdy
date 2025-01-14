@@ -14,6 +14,10 @@ const getGoalsFiltered = (goals: GoalRedux[], filters: GoalFilters): GoalRedux[]
     goalsFiltered = goalsFiltered.filter((goal) => goal.status === filters.status);
   }
 
+  if (filters.title !== undefined && filters.title !== '') {
+    goalsFiltered = goalsFiltered.filter((goal) => goal.title.includes(filters.title));
+  }
+
   return goalsFiltered;
 };
 

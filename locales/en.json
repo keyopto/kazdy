@@ -30,7 +30,8 @@
     "title": "Pep talks"
   },
   "list_goals": {
-    "title": "All Goals"
+    "title": "All Goals",
+    "placeholder_search": "Goal name"
   },
   "settings": {
     "title": "Settings"
