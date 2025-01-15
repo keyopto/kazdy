@@ -1,5 +1,6 @@
 import AddButton from '@/components/AddButton';
 import SummaryGoal from '@/components/Home/SummaryGoal';
+import PlaceholderNoObjectives from '@/components/PlaceholderNoObjectives';
 import ThemedIconSymbol from '@/components/ThemedComponents/ThemedIconSymbol';
 import ThemedLoader from '@/components/ThemedComponents/ThemedLoader';
 import ThemedText from '@/components/ThemedComponents/ThemedText';
@@ -53,6 +54,7 @@ export default function Index() {
         }}
         ListHeaderComponent={getHeader()}
         showsVerticalScrollIndicator={false}
+        ListEmptyComponent={PlaceholderNoObjectives}
       />
       <AddButton onPress={onPressAdd} />
     </ThemedView>
