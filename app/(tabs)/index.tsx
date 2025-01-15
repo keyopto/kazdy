@@ -1,6 +1,7 @@
 import AddButton from '@/components/AddButton';
 import SummaryGoal from '@/components/Home/SummaryGoal';
 import ThemedIconSymbol from '@/components/ThemedComponents/ThemedIconSymbol';
+import ThemedLoader from '@/components/ThemedComponents/ThemedLoader';
 import ThemedText from '@/components/ThemedComponents/ThemedText';
 import ThemedView from '@/components/ThemedComponents/ThemedView';
 import GoalStatus from '@/enums/GoalStatus';
@@ -11,7 +12,7 @@ import { useTranslation } from 'react-i18next';
 import { FlatList, StyleSheet } from 'react-native';
 
 export default function Index() {
-  const { goals } = useGoals({ status: GoalStatus.ON_GOING });
+  const { goals, loading } = useGoals({ status: GoalStatus.ON_GOING });
 
   const { t } = useTranslation();
 
@@ -32,6 +33,14 @@ export default function Index() {
       </ThemedView>
     );
   };
+
+  if (loading) {
+    return (
+      <ThemedView>
+        <ThemedLoader />
+      </ThemedView>
+    );
+  }
 
   return (
     <ThemedView themeColor="background" safeArea style={styles.container}>
