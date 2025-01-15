@@ -29,6 +29,21 @@ export const deleteGoal = async (goalId: number): Promise<void> => {
   await db.runAsync(`DELETE FROM goal WHERE id = ?`, goalId);
 };
 
+export const updateGoal = async (goalId: number, goal: FormDataAddGoal): Promise<void> => {
+  await db.runAsync(
+    `
+  UPDATE goal
+  SET title = ?, date = ?, description = ?, image=?
+  WHERE id = ?
+  `,
+    goal.title,
+    goal.date.toISOString(),
+    goal.description,
+    goal.image ? goal.image : null,
+    goalId
+  );
+};
+
 export const updateStatus = async (goalId: number, status: GoalStatus) => {
   await db.runAsync(
     `

@@ -8,6 +8,7 @@ import {
   deleteGoal,
   insertGoal,
   selectGoalFromId,
+  updateGoal,
   updateGoalNotification,
   updateStatus,
 } from '@/db/goalsDB';
@@ -22,7 +23,7 @@ export type useGoalsType = {
   loading: boolean;
   error: string | null;
   addGoal: (goal: FormDataAddGoal) => Promise<void>;
-  getGoalById: (id: number) => Promise<Goal | null>;
+  modifyGoal: (id: number, goal: FormDataAddGoal) => Promise<void>;
   removeGoal: (id: number) => Promise<void>;
   changeStatusGoal: (goal: Goal, status: GoalStatus) => Promise<void>;
 };
@@ -61,22 +62,18 @@ const useGoals = (filters: GoalFilters): useGoalsType => {
     dispatch(addGoalRedux(goalAdded));
   };
 
+  const modifyGoal = async (id: number, goal: FormDataAddGoal) => {
+    await updateGoal(id, goal);
+    const goalModified = await selectGoalFromId(id);
+    if (!goalModified) {
+      throw new Error('Goal was not inserted');
+    }
+    dispatch(modifyGoalRedux(goalModified));
+  };
+
   const removeGoal = async (goalId: number) => {
     await deleteGoal(goalId);
     dispatch(removeGoalRedux(goalId));
-  };
-
-  const getGoalById = async (id: number) => {
-    const goal = await selectGoalFromId(id);
-
-    if (!goal) {
-      return null;
-    }
-
-    return {
-      ...goal,
-      date: new Date(goal.date),
-    };
   };
 
   const changeStatusGoal = async (goal: Goal, status: GoalStatus) => {
@@ -84,7 +81,7 @@ const useGoals = (filters: GoalFilters): useGoalsType => {
     dispatch(modifyGoalRedux({ ...goal, status, date: goal.date.toISOString() }));
   };
 
-  return { goals, loading, error, addGoal, getGoalById, removeGoal, changeStatusGoal };
+  return { goals, loading, error, addGoal, modifyGoal, removeGoal, changeStatusGoal };
 };
 
 export default useGoals;

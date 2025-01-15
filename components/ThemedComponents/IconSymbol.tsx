@@ -20,6 +20,7 @@ const MAPPING = {
   'list.dash': 'list',
   magnifyingglass: 'search',
   nosign: 'not-interested',
+  pencil: 'edit',
 } as Partial<
   Record<
     import('expo-symbols').SymbolViewProps['name'],

@@ -1,6 +1,6 @@
 import ThemedView from '@/components/ThemedComponents/ThemedView';
 import AddGoalForm, { type FormDataAddGoal } from '@/types/forms/AddGoalForm';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { ScrollView, StyleSheet } from 'react-native';
@@ -8,22 +8,26 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import ControllerTextInput from '@/components/ControllerInputs/ControllerTextInput';
 import ControllerDatePicker from '@/components/ControllerInputs/ControllerDatePicker';
 import ThemedButton from '@/components/ThemedComponents/ThemedButton';
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import useGoals from '@/hooks/useGoals';
 import ControllerImagePicker from '@/components/ControllerInputs/ControllerImagePicker';
 
 export type AddGoalProps = {
-  __placeholder?: never;
+  goalId?: string;
 };
 
 const AddGoal: React.FC<AddGoalProps> = () => {
   const { t } = useTranslation();
-  const { addGoal } = useGoals({});
+  const { goalId } = useLocalSearchParams<AddGoalProps>();
+  const { loading, goals, addGoal, modifyGoal } = useGoals({
+    id: goalId ? Number(goalId) : undefined,
+  });
 
   const {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormDataAddGoal>({
     resolver: zodResolver(AddGoalForm(t)),
   });
@@ -37,9 +41,27 @@ const AddGoal: React.FC<AddGoalProps> = () => {
   };
 
   const onSubmit = async (goal: FormDataAddGoal) => {
-    await addGoal(goal);
-    router.dismissTo('/');
+    if (!goalId) {
+      await addGoal(goal);
+    } else {
+      await modifyGoal(Number(goalId), goal);
+    }
+    router.dismiss();
   };
+
+  useEffect(() => {
+    if (!goalId || !goals[0]) {
+      return;
+    }
+
+    const goal = goals[0];
+    reset({
+      title: goal.title,
+      date: goal.date,
+      image: goal.image ? goal.image : undefined,
+      description: goal.description,
+    });
+  }, [loading]);
 
   return (
     <ThemedView themeColor="background" style={styles.container}>

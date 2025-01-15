@@ -21,7 +21,8 @@
     "status_question": "Votre objectif est-il complété ou abandonné?",
     "pep_talk": "Encouragements vocaux",
     "status_milestone_completed": "Réalisé",
-    "status_milestone_failed": "Abandonné"
+    "status_milestone_failed": "Abandonné",
+    "modify_goal": "Modifier l'objectif"
   },
   "add_milestone": {
     "title": "Ajout d'une étape",

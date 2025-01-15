@@ -12,6 +12,7 @@ export type ModalBottomProps = {
   goal: Goal;
   onChangeStatus: () => void;
   onDeleteGoal: () => void;
+  onEditGoal: () => void;
 };
 
 const ModalBottom: React.FC<ModalBottomProps> = ({
@@ -33,6 +34,16 @@ const ModalBottom: React.FC<ModalBottomProps> = ({
     onChangeStatus();
   };
 
+  const onEditGoal = () => {
+    dismiss();
+    router.push({
+      pathname: '/goal/modify',
+      params: {
+        goalId: goal.id,
+      },
+    });
+  };
+
   const onPressPepTalks = () => {
     dismiss();
     router.push({
@@ -45,6 +56,7 @@ const ModalBottom: React.FC<ModalBottomProps> = ({
 
   return (
     <ModalBottomLayout isVisible={isVisible} dismiss={dismiss}>
+      <ThemedButton title={t('goal_details.modify_goal')} iconName="pencil" onPress={onEditGoal} />
       <ThemedButton
         title={t('goal_details.pep_talk')}
         iconName="audio.jack.mono"
