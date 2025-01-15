@@ -27,7 +27,11 @@
     "placeholder_date": "Date limite"
   },
   "pep_talk_list": {
-    "title": "Pep talks"
+    "title": "Pep talks",
+    "label_title": "Title :",
+    "placeholder_title": "Name of the Pep Talk",
+    "label_date": "Date :",
+    "placeholder_date": "XX-XX-XXXX:"
   },
   "list_goals": {
     "title": "All Goals",

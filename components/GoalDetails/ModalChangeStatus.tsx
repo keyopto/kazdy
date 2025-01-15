@@ -26,7 +26,7 @@ const ModalChangeStatus: React.FC<ModalChangeStatusProps> = ({ isVisible, dismis
   };
 
   return (
-    <ModalCenterLayout isVisible={isVisible} dismiss={dismiss}>
+    <ModalCenterLayout isVisible={isVisible} dismiss={dismiss} style={styles.constainer}>
       <ThemedText style={styles.question}>{t('goal_details.status_question')}</ThemedText>
       <ThemedView style={styles.buttonsContainer} themeColor="transparent">
         <ThemedIconButton
@@ -50,7 +50,11 @@ const styles = StyleSheet.create({
   buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-around',
-    paddingVertical: 40,
+  },
+  constainer: {
+    gap: 40,
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
   question: {
     textAlign: 'center',

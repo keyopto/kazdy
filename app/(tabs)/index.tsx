@@ -34,7 +34,7 @@ export default function Index() {
   };
 
   return (
-    <ThemedView safeArea style={styles.container}>
+    <ThemedView themeColor="background" safeArea style={styles.container}>
       <FlatList
         data={goals}
         contentContainerStyle={styles.flatList}

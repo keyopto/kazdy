@@ -3,7 +3,7 @@ import AddGoalForm, { type FormDataAddGoal } from '@/types/forms/AddGoalForm';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { zodResolver } from '@hookform/resolvers/zod';
 import ControllerTextInput from '@/components/ControllerInputs/ControllerTextInput';
 import ControllerDatePicker from '@/components/ControllerInputs/ControllerDatePicker';
@@ -42,31 +42,36 @@ const AddGoal: React.FC<AddGoalProps> = () => {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <ControllerTextInput
-        control={control}
-        name="title"
-        placeholder={t('add_goal.placeholder_title')}
-        error={errors.title}
-        label={t('add_goal.label_title')}
-      />
-      <ControllerImagePicker control={control} name="image" error={errors.image} />
-      <ControllerDatePicker
-        control={control}
-        name="date"
-        placeholder={t('add_goal.placeholder_date')}
-        label={t('add_goal.label_date')}
-        mode="date"
-        error={errors.date}
-        defaultDate={getDefaultDate()}
-      />
-      <ControllerTextInput
-        control={control}
-        name="description"
-        placeholder={t('add_goal.placeholder_description')}
-        error={errors.description}
-        label={t('add_goal.label_description')}
-      />
+    <ThemedView themeColor="background" style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <ThemedView style={styles.insideScrollView}>
+          <ControllerTextInput
+            control={control}
+            name="title"
+            placeholder={t('add_goal.placeholder_title')}
+            error={errors.title}
+            label={t('add_goal.label_title')}
+          />
+          <ControllerImagePicker control={control} name="image" error={errors.image} />
+          <ControllerDatePicker
+            control={control}
+            name="date"
+            placeholder={t('add_goal.placeholder_date')}
+            label={t('add_goal.label_date')}
+            mode="date"
+            error={errors.date}
+            defaultDate={getDefaultDate()}
+          />
+          <ControllerTextInput
+            control={control}
+            name="description"
+            placeholder={t('add_goal.placeholder_description')}
+            error={errors.description}
+            label={t('add_goal.label_description')}
+            multiline
+          />
+        </ThemedView>
+      </ScrollView>
 
       <ThemedButton type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
     </ThemedView>
@@ -80,5 +85,11 @@ const styles = StyleSheet.create({
     flex: 1,
     gap: 20,
     padding: 20,
+  },
+  insideScrollView: {
+    gap: 20,
+  },
+  scrollView: {
+    flex: 1,
   },
 });

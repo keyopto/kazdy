@@ -13,7 +13,7 @@ const Settings = () => {
   const { t } = useTranslation();
 
   return (
-    <ThemedView safeArea style={styles.container}>
+    <ThemedView themeColor="background" safeArea style={styles.container}>
       <ThemedText type="title"> {t('settings.title')} </ThemedText>
       <LanguagePicker />
     </ThemedView>

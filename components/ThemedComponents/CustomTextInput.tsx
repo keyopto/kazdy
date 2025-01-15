@@ -26,6 +26,8 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
   const cursorColor = useThemeColor({}, 'text');
   const color = useThemeColor({}, 'text');
 
+  const minHeight = multiline ? 150 : 'auto';
+
   const getLabel = () => {
     if (!label) {
       return;
@@ -39,12 +41,13 @@ const CustomTextInput: React.FC<CustomTextInputProps> = ({
       {getLabel()}
       <ThemedView style={[{ borderColor }, styles.containerInput]}>
         <TextInput
+          numberOfLines={multiline ? 7 : 1}
           value={value}
           onChangeText={setValue}
           placeholder={placeholder}
           placeholderTextColor={placeholderColor}
           cursorColor={cursorColor}
-          style={[{ color }, styles.input]}
+          style={[{ color, minHeight }, styles.input]}
           multiline={multiline}
         />
       </ThemedView>
@@ -66,5 +69,6 @@ const styles = StyleSheet.create({
   input: {
     margin: 0,
     padding: 10,
+    textAlignVertical: 'top',
   },
 });

@@ -33,10 +33,10 @@ const SummaryGoal: React.FC<SummaryGoalProps> = ({ goal }) => {
   return (
     <ThemedPressable onPress={goToDetails} style={styles.container}>
       <ImageBackground source={getSourceImage()} style={styles.image}>
-        <ThemedView style={styles.titleContainer}>
+        <ThemedView style={styles.titleContainer} themeColor="background_transparent">
           <ThemedText style={styles.title}>{goal.title}</ThemedText>
         </ThemedView>
-        <ThemedView style={styles.dateContainer}>
+        <ThemedView themeColor="background" style={styles.dateContainer}>
           <ThemedText style={styles.date}>{formatDate(goal.date)}</ThemedText>
         </ThemedView>
         <StatusDisplayer goal={goal} corner="top" />
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
   },
   titleContainer: {
     justifyContent: 'center',
-    opacity: 0.7,
     width: '40%',
   },
 });

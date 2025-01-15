@@ -12,7 +12,7 @@ export type ThemedPressableProps = PressableProps & {
 const ThemedPressable: React.FC<ThemedPressableProps> = ({
   lightColor,
   darkColor,
-  themeColor = 'background',
+  themeColor = 'transparent',
   style,
   ...rest
 }) => {

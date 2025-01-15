@@ -75,7 +75,7 @@ const PepTalkList: React.FC<PepTalkListProps> = () => {
   };
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView themeColor="background" style={styles.container}>
       <FlatList
         data={pepTalks}
         keyExtractor={(pepTalk) => {

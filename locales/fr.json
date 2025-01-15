@@ -4,16 +4,16 @@
     "catchphrase": "Gérez vos objectifs"
   },
   "add_goal": {
-    "title": "Ajout d'un goal",
-    "label_date": "Date limite",
-    "placeholder_date": "Date limite",
-    "label_title": "Titre",
-    "placeholder_title": "Titre",
+    "title": "Ajout d'un objectif",
+    "label_date": "Date limite :",
+    "placeholder_date": "XX-XX-XXXX",
+    "label_title": "Titre :",
+    "placeholder_title": "Votre titre",
     "label_description": "Description",
-    "placeholder_description": "Description"
+    "placeholder_description": "Ce que vous souhaitez faire pour cet objectif"
   },
   "goal_details": {
-    "title": "Détails du goal",
+    "title": "Détails de l'objectif",
     "d_day": "Jour J :",
     "description": "Description:",
     "change_status": "Changer Status",
@@ -24,13 +24,17 @@
   },
   "add_milestone": {
     "title": "Ajout d'une étape",
-    "label_title": "Titre",
-    "placeholder_title": "Titre",
-    "label_date": "Date limite",
-    "placeholder_date": "Date limite"
+    "label_title": "Étape :",
+    "placeholder_title": "Comment s'appelle l'étape",
+    "label_date": "Date :",
+    "placeholder_date": "XX-XX-XXXX"
   },
   "pep_talk_list": {
-    "title": "Encouragements vocaux"
+    "title": "Encouragements vocaux",
+    "label_title": "Titre :",
+    "placeholder_title": "Nom de l'enregistrement",
+    "label_date": "Date :",
+    "placeholder_date": "XX-XX-XXXX:"
   },
   "list_goals": {
     "title": "Tous les objectifs",

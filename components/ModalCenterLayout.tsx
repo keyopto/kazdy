@@ -1,16 +1,16 @@
-import React, { type ReactNode } from 'react';
-import { Modal, StyleSheet } from 'react-native';
+import React from 'react';
+
+import { Modal, StyleSheet, type ViewProps } from 'react-native';
 import ThemedPressable from './ThemedComponents/ThemedPressable';
 import ThemedView from './ThemedComponents/ThemedView';
 import ThemedIconSymbol from './ThemedComponents/ThemedIconSymbol';
 
-export type ModalCenterLayoutProps = {
+export type ModalCenterLayoutProps = ViewProps & {
   isVisible: boolean;
   dismiss: () => void;
-  children?: ReactNode;
 };
 
-const ModalCenterLayout: React.FC<ModalCenterLayoutProps> = ({ isVisible, dismiss, children }) => {
+const ModalCenterLayout: React.FC<ModalCenterLayoutProps> = ({ isVisible, dismiss, ...rest }) => {
   return (
     <Modal visible={isVisible} transparent={true}>
       <ThemedPressable
@@ -29,7 +29,7 @@ const ModalCenterLayout: React.FC<ModalCenterLayoutProps> = ({ isVisible, dismis
               <ThemedIconSymbol size={30} name="cross.fill" />
             </ThemedPressable>
           </ThemedView>
-          {children}
+          <ThemedView {...rest} />
         </ThemedView>
       </ThemedPressable>
     </Modal>

@@ -10,7 +10,7 @@ import { router, useLocalSearchParams, type UnknownOutputParams } from 'expo-rou
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 
 export interface MilestoneAddScreenParams extends UnknownOutputParams {
   goalId: string;
@@ -40,20 +40,26 @@ const MilestoneAdd = () => {
   };
 
   return (
-    <ThemedView style={styles.container}>
-      <ControllerTextInput
-        control={control}
-        name="title"
-        placeholder={t('add_milestone.placeholder_title')}
-        error={errors.title}
-      />
-      <ControllerDatePicker
-        control={control}
-        name="date"
-        placeholder={t('add_milestone.placeholder_date')}
-        mode="date"
-        error={errors.date}
-      />
+    <ThemedView themeColor="background" style={styles.container}>
+      <ScrollView style={styles.scrollView}>
+        <ThemedView style={styles.insideScrollView}>
+          <ControllerTextInput
+            control={control}
+            name="title"
+            placeholder={t('add_milestone.placeholder_title')}
+            error={errors.title}
+            label={t('add_milestone.label_title')}
+          />
+          <ControllerDatePicker
+            control={control}
+            name="date"
+            label={t('add_milestone.label_date')}
+            placeholder={t('add_milestone.placeholder_date')}
+            mode="date"
+            error={errors.date}
+          />
+        </ThemedView>
+      </ScrollView>
       <ThemedButton type="submit" title="Submit" onPress={handleSubmit(onSubmit)} />
     </ThemedView>
   );
@@ -63,6 +69,14 @@ export default MilestoneAdd;
 
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
     gap: 10,
+    padding: 20,
+  },
+  insideScrollView: {
+    gap: 20,
+  },
+  scrollView: {
+    flex: 1,
   },
 });

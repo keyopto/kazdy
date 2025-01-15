@@ -58,6 +58,6 @@ const styles = StyleSheet.create({
   },
   image: {
     height: 200,
-    marginVertical: 10,
+    marginBottom: 10,
   },
 });

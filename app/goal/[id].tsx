@@ -73,7 +73,7 @@ const GoalDetails = () => {
   };
 
   return (
-    <ThemedView style={styles.container}>
+    <ThemedView themeColor="background" style={styles.container}>
       <ThemedView style={styles.header}>
         <ThemedText style={styles.title}> {goal.title}</ThemedText>
         <MoreButton onPress={openBottomModal} />
@@ -118,12 +118,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   flatList: {
+    flex: 1,
     gap: 15,
     paddingBottom: 20,
   },
   header: {
+    alignItems: 'center',
     flexDirection: 'row',
     justifyContent: 'space-between',
+    paddingHorizontal: 10,
+    paddingVertical: 5,
   },
   title: {
     fontSize: 20,

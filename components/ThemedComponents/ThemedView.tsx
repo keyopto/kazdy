@@ -14,7 +14,7 @@ export type ThemedViewProps = ViewProps & {
 
 const ThemedView = ({
   style,
-  themeColor = 'background',
+  themeColor = 'transparent',
   lightColor,
   darkColor,
   safeArea,
