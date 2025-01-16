@@ -58,7 +58,8 @@
     "expo-image-picker": "~16.0.3",
     "expo-av": "~15.0.2",
     "expo-notifications": "~0.29.12",
-    "@react-native-picker/picker": "2.9.0"
+    "@react-native-picker/picker": "2.9.0",
+    "expo-updates": "~0.26.12"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
