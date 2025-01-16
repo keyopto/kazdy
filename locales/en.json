@@ -47,7 +47,8 @@
       "required": "Title is required"
     },
     "date": {
-      "required": "Date is required"
+      "required": "Date is required",
+      "past": "Date should not be in the past"
     },
     "description": {
       "required": "Description is required"

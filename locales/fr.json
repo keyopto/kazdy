@@ -50,7 +50,8 @@
       "required": "Le titre est requis"
     },
     "date": {
-      "required": "La date est requise"
+      "required": "La date est requise",
+      "past": "La date ne devrait pas être dans le passé"
     },
     "description": {
       "required": "La description est requise"
